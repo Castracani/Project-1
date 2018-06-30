@@ -1,7 +1,7 @@
 // steam api key 597FC535B0A81C139B5227A808EAA15B
 
 $(document).ready(function() {
-
+  $('.carousel').carousel();
 
   // Initialize Firebase
   var config = {
