@@ -19,7 +19,7 @@ $.ajax({
 
 
 // Fetch steam user profile page
-function getSteamProfile(steamNumber)
+function getSteamProfile(steamNumber){
 var queryURL = "http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=313690&key=597FC535B0A81C139B5227A808EAA15B&steamid=" + steamNumber;
 $.ajax({
    url: queryURL,
@@ -27,7 +27,7 @@ $.ajax({
  }).then(function(response) {
     
  })
-
+}
 // ==================================================================================================================================
 
 // xboxAPI key 40687e73c58e72dd8d225be86a8a11de96b04dda
