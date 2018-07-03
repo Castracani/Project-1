@@ -53,7 +53,7 @@ $(document).ready(function () {
          console.log(response)
          // create a new list for the upcoming results
          var newList = $("<ul>");
-         ("#game-div").append(newList);
+         ("#search-results").append(newList);
          // clear searchResults array
          searchResults = [""];
          //  cycle through results
@@ -70,7 +70,7 @@ $(document).ready(function () {
             searchResults.push(gameName); // this will only save the title. We could decide to save an image instead
 
             // prints game name, game image, game info, and an 'add to library' button to DIV
-            $("#game-div").append(list, gameName, gameImage, gameInfo, newButton);
+            $("#search-results").append(list, gameName, gameImage, gameInfo, newButton);
          }
 
       })
@@ -79,7 +79,7 @@ $(document).ready(function () {
 
       $(document).on("click", "add-game", function (event) {
          event.prevendDefault();
-         var inputGame = $("#game-input").val().trim();
+         var inputGame = $("#search-results").val().trim();
          addGames(inputGame);
       })
    }
@@ -91,7 +91,8 @@ $(document).ready(function () {
       var newGame = searchResults[x]; //grabs game title from searchResults array
       console.log(newGame);
       gameLibrary.push(newGame); //adds to libray variable
-      // update DIV that contains game library
+      
+      $("#game-div").push()
       // store within firebase
       
    })
