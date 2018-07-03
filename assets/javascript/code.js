@@ -67,7 +67,7 @@ $(document).ready(function () {
             var gameInfo = $("<p>").text(response.deck);
 
             // push game title to search array
-            searchResults.push(gameName);
+            searchResults.push(gameName); // this will only save the title. We could decide to save an image instead
 
             // prints game name, game image, game info, and an 'add to library' button to DIV
             $("#game-div").append(list, gameName, gameImage, gameInfo, newButton);
@@ -86,13 +86,14 @@ $(document).ready(function () {
 
    // add game to library
    $(document).on("click", ".add-game", function () {
-      var x = $(this).val();
-      var newGame = searchResults[x];
+      event.preventDefault(); 
+      var x = $(this).val(); //grabs value that will match location within array and assigns to a new variable
+      var newGame = searchResults[x]; //grabs game title from searchResults array
       console.log(newGame);
-      gameLibrary.push(newGame);
-
-      // store in firebase
-
+      gameLibrary.push(newGame); //adds to libray variable
+      // update DIV that contains game library
+      // store within firebase
+      
    })
 
 
