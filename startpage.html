@@ -18,10 +18,11 @@
     <!-- Header -->
 
     <nav>
-      <div class="nav-wrapper deep-orange darken-4">
+      <div class="col s12 nav-wrapper deep-orange darken-4">
         <a href="#!" class="brand-logo">
           <i class="material-icons icon">videogame_asset</i>Gamer Tagged</a>
-        <form class="right">
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <form class="right hide-on-med-and-down">
           <div class="input-field">
             <input id="search" type="search" required>
             <label class="label-icon" for="search">
@@ -33,10 +34,19 @@
       </div>
     </nav>
 
+    <form class="sidenav" id="mobile-demo">
+      <div class="input-field">
+        <input id="search" type="search" required>
+        <label class="label-icon" for="search">
+          <i class="material-icons">search</i>
+        </label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
 
     <div class="container">
       <div class="row main-content" style="margin-top: 38px">
-        <div class="col m6">
+        <div class="col s6">
           <div class="card deep-orange lighten-5">
             <!-- add card header -->
             <div class="card-content">
@@ -75,23 +85,28 @@
         </div>
 
 
-        <div class="col m6" style="margin-top: 50px">
+        <div class="col s6" style="margin-top: 50px">
           <div class="carousel carousel-slider">
             <a class="carousel-item" href="#one!">
               <img src="https://www.sabreakingnews.co.za/wp-content/uploads/2017/08/Gaming.jpg" style="height: 400px; width: 515px">
+              <h4>Befriend Fellow Gamers</h4>
             </a>
             <a class="carousel-item" href="#two!">
               <img src="https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/02/11/Pictures/_f3e41e8e-0ef0-11e8-9ced-6b0f736beaca.jpg"
                 style="height: 400px; width: 515px">
+                <h4>Plan Game Nights With Friends</h4>
             </a>
             <a class="carousel-item" href="#three!">
               <img src="http://wallpapercraft.site/uploads/posts/images/132967-overwatch__3272.png" style="height: 400px; width: 515px">
+              <h4>Find Reliable Teammates</h4>
             </a>
             <a class="carousel-item" href="#four!">
               <img src="http://oceanofgames.com/wp-content/uploads/2017/12/God-of-War-Game-For-PC-Free-Download-2-1024x576.jpg" style="height: 400px; width: 515px">
+              <h4>Tell Your Story</h4>
             </a>
             <a class="carousel-item" href="#five!">
               <img src="https://cdn.ndtv.com/tech/gadgets/skyrim_hd_e3_2016.jpg?output-quality=80" style="height: 400px; width: 515px">
+              <h4>Share Tips and Tricks</h4>
             </a>
           </div>
         </div>
@@ -104,7 +119,7 @@
 
     <div class="footer-copyright">
       <div class="container">
-        © 2014 Copyright Text
+        © 2014 Copyright
       </div>
     </div>
   </footer>
