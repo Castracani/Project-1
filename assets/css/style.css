@@ -33,6 +33,19 @@ main {
   margin-left: 15px
 }
 
-.title {
-  
+img {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+h4 {
+  position: absolute;
+  bottom: 45px;
+  padding: 5px;
+  color: #d50000;
+  background-color: black;
+  margin: 0;
+  width: 100%;
+  opacity: 0.8;
 }

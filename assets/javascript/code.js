@@ -133,9 +133,12 @@ $(document).ready(function () {
       next: 3
    });
 
-   setInterval(function () {
-      $('.carousel').carousel('next');
-   }, 5000);
+   $('.sidenav').sidenav();
+   $('.tabs').tabs({swipeable: true});
+
+  //  setInterval(function () {
+  //     $('.carousel').carousel('next');
+  //  }, 5000);
 
 })
 
