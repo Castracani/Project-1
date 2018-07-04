@@ -1,7 +1,6 @@
 html {
   min-height: 100vh;
   position: relative;
-  background-image: url('../images/milkyWay.jpg')
 }
 
 body {
@@ -9,6 +8,10 @@ body {
   min-height: 100vh;
   flex-direction: column;
   position: relative;
+  background-image: url(../images/milkyWay.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat:no-repeat;
 }
 
 main {
@@ -29,6 +32,15 @@ main {
   /* margin-top: 40px; */
 }
 
+.hf-color {
+  background-color: #381A57;
+}
+
+.card-color {
+  background-color: #594170;
+  color: #9B93A3;
+}
+
 .icon {
   margin-left: 15px
 }
@@ -43,7 +55,7 @@ h4 {
   position: absolute;
   bottom: 45px;
   padding: 5px;
-  color: #d50000;
+  color: #9B93A3;
   background-color: black;
   margin: 0;
   width: 100%;
