@@ -11,39 +11,64 @@ $(document).ready(function () {
 
 
 
-  // Steam api =========================================================================================================================
-  function getSteamId(steamId) {
+   // Steam api =========================================================================================================================
+   function getSteamId(steamId) {
     // Fetch steam user ID number
-    var queryURL = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + steamId
+    var queryURL = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + steamId
     $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function (response) {
-      steamNumber = response.steamid;
-      getSteamProfile(steamNumber);
+       url: queryURL,
+       method: "GET"
+    }).then(function (data) {
+     
+       steamNumber = data.response.steamid;
+     
+       getSteamProfile(steamNumber);
+       
     })
-  }
-  $(document).on("click", "steam-id", function (event) {
-    event.prevendDefault();
-    var steamId = $("#steam-id-input").val().trim();
-    addGames(steamId);
-  })
+ }
+//  get steam ID from vanity URL search
+ $("#steam-submit").on("click", function(){
+    event.preventDefault();
+    var steamId = $("#steam-input").val().trim();
+    
+   getSteamId(steamId);
+ })
 
 
-  // Fetch steam user profile page
+ // Fetch steam user profile page
 
-  // nick's steam ID for testing purposes: 76561197972752173
+ // nick's steam ID for testing purposes: 76561197972752173
 
-  function getSteamProfile(steamNumber) {
-    var queryURL = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + steamNumber;
+ function getSteamProfile(number) {
+    var queryURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + number;
     $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function (response) {
+       url: queryURL,
+       method: "GET"
+    }).then(function (data) {
 
+
+     var avatar = data.response.players[0].avatarmedium;
+     var playerOnline;
+     var image = $("<img src='" + avatar + "' />")
+     var name = $("<h3>").text(data.response.players[0].personaname)
+     var lastLogOff = data.response.players[0].lastlogoff;
+     var newDate = $.parseJSON(lastLogOff);
+     var formatDate = new Date(1000*newDate);
+     var lastOnline = $("<p>").text("Last online: " + formatDate);
+     // check if online 
+     var online = data.response.players[0].personastate;
+     if (online === 0){
+       online = "no";
+     } else if (online === 1){
+       online = "yes";
+     }
+    playerOnline = $("<p>").text("online: " + online)
+    
+     $("#steam-div").append(image, name, playerOnline, lastOnline);
     })
-  }
-  // ==================================================================================================================================
+ }
+
+ // ==================================================================================================================================
 
   // xboxAPI key 40687e73c58e72dd8d225be86a8a11de96b04dda
 
@@ -138,7 +163,10 @@ $(document).ready(function () {
 
   // object that will hold user profile locally
   var curUser = {
-    name: "",
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
     avatar: "",
     steamName: "",
     psnName: "",
@@ -149,12 +177,15 @@ $(document).ready(function () {
     // will add more later
   }
 
-  $(document).on("click", "#user-submit", function () {
-    curUser.name = ("#name-input").val().trim();
-    curUser.steamName = ("#steam-input").val().trim();
-    curUser.psnName = ("#psn-input").val().trim();
-    curUser.xboxName = ("#xbox-input").val().trim();
-    curUser.nintendoId = ("#nintendo-input").val().trim();
+  $(document).on("click", "#profile-submit", function () {
+    curUser.firstName = ("#first_name").val().trim();
+    curUser.lastName = ("#last_name").val().trim();
+    curUser.username = ("username").val().trim();
+    curUser.email = ("#email").val().trim();
+    curUser.steamName = ("#steam-name").val().trim();
+    curUser.psnName = ("#psn-name").val().trim();
+    curUser.xboxName = ("#gamer-tag").val().trim();
+    curUser.nintendoId = ("#nintendo-id").val().trim();
     curUser.aboutMe = ("#about-input").val().trim();
 
     // print and format data to DIV containing user info on profile page
