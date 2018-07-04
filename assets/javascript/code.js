@@ -2,6 +2,22 @@
 
 $(document).ready(function () {
 
+  // Initialize Firebase
+  var config = {
+   apiKey: "AIzaSyBCCCo7SJJGH4kO-BeDnXvTYULEhCUjdd0",
+   authDomain: "gamer-tagged.firebaseapp.com",
+   databaseURL: "https://gamer-tagged.firebaseio.com",
+   projectId: "gamer-tagged",
+   storageBucket: "",
+   messagingSenderId: "586030490192"
+ };
+ firebase.initializeApp(config);
+
+
+
+
+
+
 
    // Steam api =========================================================================================================================
    function getSteamId(steamId) {
@@ -45,11 +61,11 @@ $(document).ready(function () {
 
    function addGames(game) {
 
-      var queryURL = "https://www.giantbomb.com/api/search/?api_key=47d89cf2776025d8ace3e66e641a4eb8bd066fc5&format=json&query=" + game + "&resources=game&format=json"
+      var queryURL = "https://www.giantbomb.com/api/search/?api_key=47d89cf2776025d8ace3e66e641a4eb8bd066fc5&format=json&query=" + game + "&resources=game&format=json";
       $.ajax({
          url: queryURL,
          method: "GET"
-      }).then(function (response) {
+      }).then(function(response) {
          console.log(response)
          // create a new list for the upcoming results
          var newList = $("<ul>");
@@ -58,7 +74,7 @@ $(document).ready(function () {
          searchResults = [""];
          //  cycle through results
          for (i = 0; i < response.length; i++) {
-            var newButton = $("<button>" + "add to library" + "</button");
+            var newButton = $("<button>" + "add to library" + "</button>");
             newButton.addClass("add-game");
             newButton.val([i]);
             var list = $("<li>");
@@ -74,15 +90,17 @@ $(document).ready(function () {
          }
 
       })
+   }
 
       // game search input+++++++++++++++++++++++++++++++++++++++++
 
-      $(document).on("click", "add-game", function (event) {
-         event.prevendDefault();
-         var inputGame = $("#search-results").val().trim();
+      $("#search-game").on("click", function(event) {
+         event.preventDefault();
+         var inputGame = $("#search-input").val().trim();
+         console.log(inputGame)
          addGames(inputGame);
       })
-   }
+   
 
    // add game to library
    $(document).on("click", ".add-game", function () {
@@ -140,6 +158,9 @@ $(document).ready(function () {
   //  setInterval(function () {
   //     $('.carousel').carousel('next');
   //  }, 5000);
+
+
+  
 
 })
 
