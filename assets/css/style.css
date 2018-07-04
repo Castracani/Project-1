@@ -49,3 +49,30 @@ h4 {
   width: 100%;
   opacity: 0.8;
 }
+
+@media (max-width: 500px) {
+  .brand-logo{
+    right: 75px;
+    width: 75%;
+    height: 56px;
+    font-size: 25px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .brand-logo{
+    right: 75px;
+    width: 75%;
+    height: 56px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 300px) {
+  .brand-logo{
+    right: 75px;
+    width: 75%;
+    height: 56px;
+    font-size: 25px !important;
+  }
+}
