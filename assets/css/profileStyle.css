@@ -5,3 +5,28 @@
 #sideNavBar{
     margin:0px;
 }
+.icon{
+    margin-left:15px;
+}
+body{
+    background-image: url(../images/milkyWay.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat:no-repeat;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    position: relative;
+}
+
+main{
+    flex: 1 0 auto;
+}
+.sideBar{
+    margin:15px;
+    min-height: 70%;
+}
+
+.profile{
+    margin:15px;
+}
