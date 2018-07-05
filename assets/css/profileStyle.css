@@ -19,6 +19,21 @@ body{
     position: relative;
 }
 
+.card-margin{
+  margin-top:45px;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing:2px;
+  line-height: 200%;
+
+
+}
+
+.imageResponsive{
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
 main{
     flex: 1 0 auto;
 }
@@ -84,6 +99,9 @@ html {
   
   .icon {
     margin-left: 15px
+  }
+  .smallBox{
+    margin-left:10px;
   }
   
   img {
