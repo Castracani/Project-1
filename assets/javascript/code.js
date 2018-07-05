@@ -2,8 +2,18 @@
 
 $(document).ready(function () {
 
-  // Initialize Firebase here (currently at bottom of page)
-
+   // Initialize Firebase
+   var config = {
+    apiKey: "AIzaSyBZvq3N02QOEG6fa-6qiDLwOHoSeIBza0Q",
+    authDomain: "game-website-9813e.firebaseapp.com",
+    databaseURL: "https://game-website-9813e.firebaseio.com",
+    projectId: "game-website-9813e",
+    storageBucket: "game-website-9813e.appspot.com",
+    messagingSenderId: "70919236665"
+ };
+ firebase.initializeApp(config);
+ var database = firebase.database();
+ var usersRef = database.users;
 
 
 
@@ -50,6 +60,8 @@ $(document).ready(function () {
      var avatar = data.response.players[0].avatarmedium;
      var playerOnline;
      var image = $("<img src='" + avatar + "' />")
+    //  curUser.avatar = image;
+    //  $("#image-share").html(image);
      var name = $("<h3>").text(data.response.players[0].personaname)
      var lastLogOff = data.response.players[0].lastlogoff;
      var newDate = $.parseJSON(lastLogOff);
@@ -174,6 +186,7 @@ $(document).ready(function () {
     nintendoId: "",
     aboutMe: "",
     status: "",
+    friends: []
     // will add more later
   }
 
@@ -190,6 +203,10 @@ $(document).ready(function () {
 
     // print and format data to DIV containing user info on profile page
     // store data into firebase
+    database.ref("profile/users/").push({
+      name: curUser.firstName,
+  
+    })
   })
 
   $('.carousel.carousel-slider').carousel({
@@ -201,9 +218,9 @@ $(document).ready(function () {
   $('.sidenav').sidenav();
   $('.tabs').tabs({ swipeable: true });
 
-  //  setInterval(function () {
-  //     $('.carousel').carousel('next');
-  //  }, 5000);
+   setInterval(function () {
+      $('.carousel').carousel('next');
+   }, 5000);
 
 // find steam id.....
 $(document).on("click", "#get-steam", function(){
@@ -243,27 +260,41 @@ function returnSteamName(id){
 // Profile creation end <<<=================================================================
 
 
-// firebase
+// creating a dynamic jpg of user id's
+function draw() {
+// text
+var par = document.getElementById('canvas').getContext('2d');
+par.font = '30px serif';
+par.fillText("Gamer ID Card", 8, 40);
+// psn name
+if(curUser.psnName !== undefined){
+par.fillText("psn: " + curUser.psnName, 220, 100);
+} else { 
+  par.fillText("psn: none", 220, 100);
+}
+// xbox name
+if(curUser.xboxName !== undefined){
+par.fillText("xbox: " + curUser.xboxName, 220, 150);
+} else {
+  par.fillText("xbox: none", 220, 150);
+}
+// steam name
+if(curUser.steamName !== undefined){
+par.fillText("steam: " + curUser.steamName, 220, 200);
+} else {
+  par.fillText("steam: none", 220, 200);
+}
 
-   // firebase is blanked out for now until we work on it
-
-/*
-
-
-   
-
-   // Initialize Firebase
-   var config = {
-      apiKey: "AIzaSyBZvq3N02QOEG6fa-6qiDLwOHoSeIBza0Q",
-      authDomain: "game-website-9813e.firebaseapp.com",
-      databaseURL: "https://game-website-9813e.firebaseio.com",
-      projectId: "game-website-9813e",
-      storageBucket: "game-website-9813e.appspot.com",
-      messagingSenderId: "70919236665"
-   };
-   firebase.initializeApp(config);
+// avatar image
+var ctx = canvas.getContext('2d');
+ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
+}
 
 
 
-*/
+
+// start page floating button
+$('.fixed-action-btn').floatingActionButton();
+
+
 

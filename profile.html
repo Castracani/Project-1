@@ -18,39 +18,54 @@
         <main>
             <!-- NAVBAR -->
             <div class "container">
-                <nav>
-                    <div class="nav-wrapper deep-orange darken-4">
-                        <a href="#!" class="brand-logo">
-                            <i class="material-icons icon">videogame_asset</i>Logo</a>
-                        <form class="right">
-                            <div class="input-field">
-                                <input id="search" type="search" required>
-                                <label class="label-icon" for="search">
-                                    <i class="material-icons">search</i>
-                                </label>
-                                <i class="material-icons">close</i>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
+           
+    <nav>
+        <div class="nav-wrapper hf-color">
+          <a href="#!" class="brand-logo">
+            <i class="material-icons icon">videogame_asset</i>Gamer Tagged</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+          </a>
+          <form class="right hide-on-med-and-down">
+            <div class="input-field">
+              <input id="search" type="search" required>
+              <label class="label-icon" for="search">
+                <i class="material-icons">search</i>
+              </label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+      </nav>
+  
+      <form class="sidenav" id="mobile-demo">
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search">
+            <i class="material-icons">search</i>
+          </label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+  
+  
             </div>
 
             <!--SIDEBAR-->
             <div class="row">
                 <div class="col s12 m12 l12">
                     <div class="row">
-                        <div class="col s3 m3 l2 sideBar deep-orange lighten-1">
-                            <div class="card horizontal deep-orange lighten-4">
+                        
+                        <div class="col s3 m3 l2 z-depth-5 card-color" id="sideBar">
+                            <div class="card horizontal card-color-light" id="sideBarContent">
                                 <div class="card-stacked">
                                     <div class="card-content">
-                                        <p>Stats:. Officia, reiciendis?</p>
-                                        <p>Something else:
-                                        </p>
+                                       <h3>My game library:</h3>
+                                       <hr>
+                                       <div id="library">
+                                           
+                                       </div>
 
-                                        <p>GAMES</p>
-                                        <p>SCORES</p>
-                                        <p>FRIENDS</p>
-                                        <p>CHEATS</p>
                                     </div>
                                 </div>
                             </div>
@@ -61,15 +76,15 @@
                         <!-- <div class="row" style="padding-top:30px;"> -->
                         <div class="col m9 l9 profile">
                             <div class="row">
-                                <div class="col l11 push-l1 deep-orange lighten-1">
-                                    <h2 class="header deep-orange lighten-1">John Smith</h2>
-                                    <div class="card horizontal deep-orange lighten-4">
+                                <div class="col l11 push-l1 card-color">
+                                    <h2 class="header card-color">John Smith</h2>
+                                    <div class="card horizontal card-color-light">
                                         <div class="card-image" id="profileImage">
                                             <img src="assets/images/profile picture Michael Scott.jpg">
                                         </div>
                                         <div class="card-stacked">
                                             <div class="card-content">
-                                                <p>Stats: Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
                                                     reiciendis?
                                                 </p>
                                                 <p>Something else: Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -197,21 +212,44 @@
                 </div>
             </div>
         </main>
-
-
-        <footer class="page-footer deep-orange darken-4">
-            <div class="container">
-                <div class="row">
-                </div>
+        <div class="fixed-action-btn">
+                <a href="#" class="btn-floating red btn-large">
+                    <i class="large material-icons">add</i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="home.html" class="btn-floating green btn-large">
+                            <i class="large material-icons">home</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html" class="btn-floating blue btn-large">
+                            <i class="large material-icons">face</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="library.html" class="btn-floating orange btn-large">
+                            <i class="large material-icons">library_add</i>
+                        </a>
+                        <li>
+                            <a href="aboutUs.html" class="btn-floating yellow btn-large">
+                                <i class="large material-icons">videogame_asset
+                                </i>
+                            </a>
+                        </li>
+                    </li>
+                </ul>
             </div>
-            <div class="footer-copyright">
-                <div class="container">
-                    © 2014 Copyright Text
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-                </div>
-            </div>
 
-        </footer>
+     
+  <footer class="page-footer hf-color">
+
+    <div class="footer-copyright">
+      <div class="container">
+        © 2014 Copyright Text
+      </div>
+    </div>
+  </footer>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 
