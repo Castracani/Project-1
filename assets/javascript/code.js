@@ -50,6 +50,8 @@ $(document).ready(function () {
      var avatar = data.response.players[0].avatarmedium;
      var playerOnline;
      var image = $("<img src='" + avatar + "' />")
+    //  curUser.avatar = image;
+    //  $("#image-share").html(image);
      var name = $("<h3>").text(data.response.players[0].personaname)
      var lastLogOff = data.response.players[0].lastlogoff;
      var newDate = $.parseJSON(lastLogOff);
@@ -241,6 +243,37 @@ function returnSteamName(id){
 })
 
 // Profile creation end <<<=================================================================
+
+// creating a dynamic jpg of user id's
+function draw() {
+// text
+var par = document.getElementById('canvas').getContext('2d');
+par.font = '30px serif';
+par.fillText("Gamer ID Card", 8, 40);
+// psn name
+if(curUser.psnName !== undefined){
+par.fillText("psn: " + curUser.psnName, 220, 100);
+} else { 
+  par.fillText("psn: none", 220, 100);
+}
+// xbox name
+if(curUser.xboxName !== undefined){
+par.fillText("xbox: " + xbox, 220, 150);
+} else {
+  par.fillText("xbox: none", 220, 150);
+}
+// steam name
+if(curUser.steamName !== undefined){
+par.fillText("steam: " + steam, 220, 200);
+} else {
+  par.fillText("steam: none", 220, 200);
+}
+
+// avatar image
+var ctx = canvas.getContext('2d');
+ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
+}
+
 
 
 // firebase
