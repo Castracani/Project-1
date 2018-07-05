@@ -17,7 +17,6 @@
 <body>
   <main>
     <!-- Header -->
-
     <nav>
       <div class="col s12 nav-wrapper hf-color">
         <a href="#!" class="brand-logo">
@@ -27,7 +26,7 @@
         </a>
         <form class="right hide-on-med-and-down">
           <div class="input-field">
-            <input id="search" type="search" required>
+            <input placeholder="Find Other Gamers" id="search" type="search" required>
             <label class="label-icon" for="search">
               <i class="material-icons">search</i>
             </label>
@@ -36,7 +35,7 @@
         </form>
       </div>
     </nav>
-
+    <!-- Mobile responsive search bar-->
     <form class="sidenav" id="mobile-demo">
       <div class="input-field">
         <input id="search" type="search" required>
@@ -47,83 +46,98 @@
       </div>
     </form>
 
+
     <div class="container">
       <div class="row main-content" style="margin-top: 38px">
         <div class="col s12 m12 l6">
+          <!-- Profile login/Create profile card -->
           <div class="card card-color z-depth-5">
-            <!-- add card header -->
             <div class="card-content">
               <div class="row ">
                 <form class="col s12">
-                  <span class="card-title">Create User Profile</span>
+                  <span class="card-title">Profile Login</span>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="first_name" type="text" class="validate">
-                      <label for="first_name">First Name</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input id="last_name" type="text" class="validate">
-                      <label for="last_name">Last Name</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input id="username" type="text" class="validate">
+                      <input id="username" type="text" class="validate" id="username-input-startpage">
                       <label for="username">Username</label>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate">
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <input id="cpassword" type="email" class="validate">
+                      <label for="cpassword">Confirm Password</label>
+                    </div>
+                  </div>
+
                 </form>
               </div>
             </div>
             <div class="card-action" style="padding: 10px; ">
-              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <button class="btn waves-effect waves-light" type="submit" name="action" id="login-button">Submit
+                <i class="material-icons right">send</i>
+              </button>
+              <button class="btn waves-effect waves-light" type="submit" name="action" id="create-profile-button" style="float: right;">Create Profile
                 <i class="material-icons right">send</i>
               </button>
             </div>
           </div>
+
         </div>
 
 
-        <div class="col s12 m8 offset-m2 l6" style="margin-top: 50px">
+        <div class="col s12 m8 offset-m2 l6" style="margin-top: 40px">
+          <!-- Carousel of images -->
           <div class="carousel carousel-slider z-depth-5">
             <a class="carousel-item" href="#one!">
-              <img src="https://www.sabreakingnews.co.za/wp-content/uploads/2017/08/Gaming.jpg" style="height: 400px; width: 515px">
+              <img src="assets/images/gameretroimg.jpg" style="height: 400px; width: 515px">
               <h4>Befriend Fellow Gamers</h4>
             </a>
             <a class="carousel-item" href="#two!">
-              <img class="responsive-img" src="https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/02/11/Pictures/_f3e41e8e-0ef0-11e8-9ced-6b0f736beaca.jpg"
-                style="height: 400px; width: 515px">
+              <img class="responsive-img" src="assets/images/threegamers.jpg" style="height: 400px; width: 515px">
               <h4>Plan Game Nights With Friends</h4>
             </a>
             <a class="carousel-item" href="#three!">
-              <img class="responsive-img" src="http://wallpapercraft.site/uploads/posts/images/132967-overwatch__3272.png" style="height: 400px; width: 515px">
+              <img class="responsive-img" src="assets/images/overwatch.png" style="height: 400px; width: 515px">
               <h4>Find Reliable Teammates</h4>
             </a>
             <a class="carousel-item" href="#four!">
-              <img class="responsive-img" src="http://oceanofgames.com/wp-content/uploads/2017/12/God-of-War-Game-For-PC-Free-Download-2-1024x576.jpg"
-                style="height: 400px; width: 515px">
+              <img class="responsive-img" src="assets/images/gow.jpg" style="height: 400px; width: 515px">
               <h4>Tell Your Story</h4>
             </a>
             <a class="carousel-item" href="#five!">
-              <img class="responsive-img" src="https://cdn.ndtv.com/tech/gadgets/skyrim_hd_e3_2016.jpg?output-quality=80" style="height: 400px; width: 515px">
+              <img class="responsive-img" src="assets/images/skyrim.jpg" style="height: 400px; width: 515px">
               <h4>Share Tips and Tricks</h4>
             </a>
           </div>
+
         </div>
+
       </div>
     </div>
+
   </main>
 
 
   <footer class="page-footer hf-color">
 
     <div class="footer-copyright">
+
       <div class="container">
         © 2014 Copyright
       </div>
+
     </div>
+
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
