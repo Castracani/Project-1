@@ -189,6 +189,7 @@ $(document).ready(function () {
 
 
   $("#login-btn").click(function (user) {
+    $(".modal-content").html("");
     var user = firebase.auth().currentUser;
     var email = $("#login-email").val().trim();
     var password = $("#login-password").val().trim();
