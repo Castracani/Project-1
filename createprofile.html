@@ -81,47 +81,47 @@
             <div class="card-content">
               <div class="row ">
 
-                <form class="formValidate" id="formValidate" method="get" action="" novalidate="novalidate" class="col s12">
+                <form class="formValidate" id="formValidate" method="get" action="" class="col s12">
                   <span class="card-title">Create User Profile</span>
                   <div class="row">
                     <div class="input-field col s6">
-                      <input id="firstname" name="firstname" type="text" class="validate" data-error=".errorTxt1">
+                      <input id="firstname" name="firstname" type="text">
                       <label for="firstname">First Name</label>
                     </div>
                     <div class="input-field col s6">
-                      <input id="lastname" name="lastname" type="text" class="validate">
+                      <input id="lastname" name="lastname" type="text">
                       <label for="lastname">Last Name</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s6">
-                      <input id="username" type="text" class="validate">
-                      <label for="username">Username</label>
+                      <input id="usernameInput" name="usernameInput" type="text">
+                      <label for="usernameInput">Username</label>
                     </div>
                     <div class="input-field col s6">
-                      <input id="email" type="email" class="validate">
+                      <input id="email" name="email" type="email">
                       <label for="email">Email</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s6">
-                      <input id="password" type="password" class="validate">
+                      <input id="password" name="password" type="password">
                       <label for="password">Password</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="cpassword" type="email" class="validate">
-                        <label for="cpassword">Confirm Password</label>
-                      </div>
+                      <input id="cpassword" name="cpassword" type="password">
+                      <label for="cpassword">Confirm Password</label>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="psn-name" type="text" class="validate">
+                      <input id="psn-name" type="text">
                       <label for="psn-name">PSN Name</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="gamer-tag" type="text" class="validate">
+                      <input id="gamer-tag" type="text">
                       <label for="gamer-tag">Xbox Gamer Tag</label>
                     </div>
                   </div>
@@ -168,15 +168,16 @@
 
     <div class="footer-copyright">
       <div class="container">
-        © 2014 Copyright Text
+        © 2018 Copyright
       </div>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-  <script src="assets/javascript/code.js"></script>
-  <script src="assets/javascript/validate.js"></script>
+  <script type="text/javascript" src="assets/javascript/validate.js"></script>
+ 
 </body>
 
 </html>

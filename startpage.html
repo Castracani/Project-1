@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Firebase script -->
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <link href="favicon.ico" type="image/x-icon" rel="shortcut icon" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <title>Gamer Tagged</title>
@@ -24,19 +24,15 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger">
           <i class="material-icons">menu</i>
         </a>
-        <form class="right hide-on-med-and-down">
-          <div class="input-field">
-            <input placeholder="Find Other Gamers" id="search" type="search" required>
-            <label class="label-icon" for="search">
-              <i class="material-icons">search</i>
-            </label>
-            <i class="material-icons">close</i>
-          </div>
-        </form>
+        <!-- Search bar in nav -->
+        <button class="btn waves-effect waves-light hide-on-med-and-down" type="btn" name="action" id="signout-btn" style="float: right;">Logout
+
+        </button>
+
       </div>
     </nav>
     <!-- Mobile responsive search bar-->
-    <form class="sidenav" id="mobile-demo">
+    <!-- <form class="sidenav" id="mobile-demo">
       <div class="input-field">
         <input id="search" type="search" required>
         <label class="label-icon" for="search">
@@ -44,7 +40,7 @@
         </label>
         <i class="material-icons">close</i>
       </div>
-    </form>
+    </form> -->
 
 
     <div class="container">
@@ -55,27 +51,18 @@
             <div class="card-content">
               <div class="row ">
                 <form class="col s12">
+
                   <span class="card-title">Profile Login</span>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="username" type="text" class="validate" id="username-input-startpage">
-                      <label for="username">Username</label>
+                      <input id="login-email" type="email" class="validate">
+                      <label for="login-email">Email</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="email" type="email" class="validate">
-                      <label for="email">Email</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <input id="password" type="password" class="validate">
-                      <label for="password">Password</label>
-                    </div>
-                    <div class="input-field col s6">
-                      <input id="cpassword" type="email" class="validate">
-                      <label for="cpassword">Confirm Password</label>
+                      <input id="login-password" type="password" class="validate">
+                      <label for="login-password">Password</label>
                     </div>
                   </div>
 
@@ -83,10 +70,10 @@
               </div>
             </div>
             <div class="card-action" style="padding: 10px; ">
-              <button class="btn waves-effect waves-light" type="submit" name="action" id="login-button">Submit
+              <button class="btn waves-effect waves-light" type="submit" name="action" id="login-btn">Submit
                 <i class="material-icons right">send</i>
               </button>
-              <button class="btn waves-effect waves-light" type="submit" name="action" id="create-profile-button" style="float: right;">Create Profile
+              <button class="btn waves-effect waves-light" type="submit" name="action" id="profile-modal" style="float: right;">Create Profile
                 <i class="material-icons right">send</i>
               </button>
             </div>
@@ -127,22 +114,123 @@
 
   </main>
 
+  <div id="modal1" class="modal">
+    <!-- Character length modal -->
+    <div class="modal-content">
+      <h3>Create Profile</h3>
+      <form class="formValidate" id="formValidate" method="get" action="" class="col s12">
+        <span class="card-title">Create User Profile</span>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="firstname" name="firstname" type="text">
+            <label for="firstname">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="lastname" name="lastname" type="text">
+            <label for="lastname">Last Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="username" name="username" type="text">
+            <label for="username">Username</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="email" name="email" type="email">
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="id_pwd" name="pwd" type="password">
+            <label for="id_pwd">Password</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="id_conf_pwd" name="conf_pwd" type="password">
+            <label for="id_conf_pwd">Confirm Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="psn-name" type="text">
+            <label for="psn-name">PSN Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="gamer-tag" type="text">
+            <label for="gamer-tag">Xbox Gamer Tag</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="Enter Vanity URL" id="steam-name" type="text" class="validate">
+            <label for="steam-name">Steam Name</label>
+            <button class="btn waves-effect waves-light" type="submit" name="action" id="get-steam">Find Steam Id
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="submit-btn">Submit</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
+  <!-- Floating Action Button -->
+  <div class="fixed-action-btn">
+    <a href="#" class="btn-floating float-button-color btn-large">
+      <i class="large material-icons">add</i>
+    </a>
+    <ul>
+      <!-- Link to Home page -->
+      <li>
+        <a href="home.html" class="btn-floating green btn-large">
+          <i class="large material-icons">home</i>
+        </a>
+      </li>
+      <!-- Link to Profile page -->
+      <li>
+        <a href="profile.html" class="btn-floating blue btn-large">
+          <i class="large material-icons">face</i>
+        </a>
+      </li>
+      <!-- Link to Library page -->
+      <li>
+        <a href="library.html" class="btn-floating orange btn-large">
+          <i class="large material-icons">library_add</i>
+        </a>
+        <!-- Link to AboutUs page -->
+        <li>
+          <a href="aboutUs.html" class="btn-floating yellow btn-large">
+            <i class="large material-icons">videogame_asset
+            </i>
+          </a>
+        </li>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sticky Footer -->
   <footer class="page-footer hf-color">
 
     <div class="footer-copyright">
-
       <div class="container">
-        © 2014 Copyright
+        &copy; 2014 Copyright
       </div>
-
     </div>
 
   </footer>
-
+  <!-- Jquery Plugin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Jquery Validate Plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+  <!-- Materialize Plugin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-  <script src="assets/javascript/code.js"></script>
+  <!-- Script Link -->
+  <script src="assets/javascript/script.js"></script>
+
 </body>
 
 </html>

@@ -330,7 +330,12 @@ setInterval(function () {
 }, 5000);
 
 
+$("#signout-btn").click(function () {
+  firebase.auth().signOut();
+  localStorage.clear();
+  window.location = "startpage.html";
 
+});
 
 
 })
