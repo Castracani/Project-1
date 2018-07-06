@@ -311,11 +311,6 @@ $('.fixed-action-btn').floatingActionButton();
 // tabs
 $('.tabs').tabs();
 
-
-
-$('.fixed-action-btn').floatingActionButton();
-  
-
 $('.carousel.carousel-slider').carousel({
   fullWidth: true,
   indicators: true,
@@ -323,6 +318,7 @@ $('.carousel.carousel-slider').carousel({
 });
 
 $('.sidenav').sidenav();
+
 $('.tabs').tabs({ swipeable: true });
 
 setInterval(function () {
