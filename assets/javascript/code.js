@@ -1,6 +1,22 @@
-
+// object that will hold user profile locally
+var curUser = {
+  username: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  avatar: "",
+  steamName: "",
+  psnName: "",
+  xboxName: "",
+  nintendoId: "",
+  aboutMe: "",
+  status: "",
+  steamOnline: "",
+  steamLastOnline: ""
+}
 
 $(document).ready(function () {
+
 
   // Initialize Firebase
   // var config = {
@@ -63,8 +79,7 @@ $(document).ready(function () {
     }).then(function (data) {
 
 
-      var avatar = data.response.players[0].avatarmedium;
-      var playerOnline;
+      curUser.avatar = data.response.players[0].avatarmedium;
       var image = $("<img src='" + avatar + "' />")
       //  curUser.avatar = image;
       //  $("#image-share").html(image);
@@ -72,17 +87,15 @@ $(document).ready(function () {
       var lastLogOff = data.response.players[0].lastlogoff;
       var newDate = $.parseJSON(lastLogOff);
       var formatDate = new Date(1000 * newDate);
-      var lastOnline = $("<p>").text("Last online: " + formatDate);
+      curUser.steamLastOnline = formatDate
       // check if online 
       var online = data.response.players[0].personastate;
       if (online === 0) {
-        online = "no";
+        curUser.steamOnline = "no"
       } else if (online === 1) {
-        online = "yes";
+        curUser.steamOnline = "yes"
       }
-      playerOnline = $("<p>").text("online: " + online)
-
-      $("#steam-div").append(image, name, playerOnline, lastOnline);
+      
     })
   }
 
@@ -192,22 +205,6 @@ $(document).ready(function () {
 
   // Profile creation start ============================================================>>>
 
-  // object that will hold user profile locally
-  var curUser = {
-    username: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    avatar: "",
-    steamName: "",
-    psnName: "",
-    xboxName: "",
-    nintendoId: "",
-    aboutMe: "",
-    status: "",
-    // friends: []
-    // will add more later
-  }
 
   $(document).on("click", "#profile-submit", function () {
     event.preventDefault();
@@ -280,11 +277,25 @@ $(document).ready(function () {
       var steamName = data.response.players[0].personaname;
       console.log(steamName)
       $("#steam-name").val(steamName);
+      curUser.avatar = data.response.players[0].avatarmedium;
+      //  curUser.avatar = image;
+      //  $("#image-share").html(image);
+      var lastLogOff = data.response.players[0].lastlogoff;
+      var newDate = $.parseJSON(lastLogOff);
+      var formatDate = new Date(1000 * newDate);
+      curUser.steamLastOnline = formatDate
+      // check if online 
+      var online = data.response.players[0].personastate;
+      if (online === 0) {
+        curUser.steamOnline = "no"
+      } else if (online === 1) {
+        curUser.steamOnline = "yes"
+      }
     })
   }
 
 
-})
+
 
 // Profile creation end <<<=================================================================
 
@@ -330,7 +341,10 @@ $("#status").html("<p>" + curUser.status + "</p>");
   $("#status").html("<p>Update your status here</p>");
 } 
 // game library
-// 
+// steam
+if (curUser.steamName !== undefined){
+  $("#steam-name").html("<p>" + curUser.steamName + "</p>");
+}
 }
 populatePage();
 
@@ -341,4 +355,62 @@ $('.fixed-action-btn').floatingActionButton();
 $('.tabs').tabs();
 
 
+$("#formValidate").validate({
+  rules: {
+    firstname: {
+      required: true
+    },
+    lastname: {
+      required: true
+    },
+    usernameInput: {
+      required: true,
+      minlength: 5
+    },
+    password: {
+      required: true,
+      minlength: 5
+    },
+    cpassword: {
+      required: true,
+      minlength: 5,
+      equalTo: "#password"
+    },
+  },
+  //For custom messages
+  messages: {
+    firstname: { required: "Enter a First Name"},
+    lastname: { required: "Enter a Last Name"},
+    usernameInput: {
+      required: "Enter a Last Name",
+      minlength: "Must be at least 5 characters"
+    },
+    password: {
+      required: "Enter a Password",
+      minlength: "Must be at least 5 characters"
+    },
+    cpassword: {
+      required: "Re-Enter Password",
+      minlength: "Must be at least 5 characters",
+      equalTo: "Passwords Must Match"
+    }
+
+  },
+  errorElement: 'div',
+  errorPlacement: function (error, element) {
+    var placement = $(element).data('error');
+    if (placement) {
+      $(placement).append(error)
+    } else {
+      error.insertAfter(element);
+    }
+  }
+});
+  
+
+
+
+
+
+})
 
