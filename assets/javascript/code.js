@@ -2,85 +2,91 @@
 
 $(document).ready(function () {
 
-   // Initialize Firebase
-   var config = {
-    apiKey: "AIzaSyBZvq3N02QOEG6fa-6qiDLwOHoSeIBza0Q",
-    authDomain: "game-website-9813e.firebaseapp.com",
-    databaseURL: "https://game-website-9813e.firebaseio.com",
-    projectId: "game-website-9813e",
-    storageBucket: "game-website-9813e.appspot.com",
-    messagingSenderId: "70919236665"
- };
- firebase.initializeApp(config);
- var database = firebase.database();
- var usersRef = database.users;
+  // Initialize Firebase
+  // var config = {
+  //   apiKey: "AIzaSyBZvq3N02QOEG6fa-6qiDLwOHoSeIBza0Q",
+  //   authDomain: "game-website-9813e.firebaseapp.com",
+  //   databaseURL: "https://game-website-9813e.firebaseio.com",
+  //   projectId: "game-website-9813e",
+  //   storageBucket: "game-website-9813e.appspot.com",
+  //   messagingSenderId: "70919236665"
+  // };
+  // firebase.initializeApp(config);
+
+  var config = {
+    apiKey: "AIzaSyBCCCo7SJJGH4kO-BeDnXvTYULEhCUjdd0",
+    authDomain: "gamer-tagged.firebaseapp.com",
+    databaseURL: "https://gamer-tagged.firebaseio.com",
+    projectId: "gamer-tagged",
+    storageBucket: "gamer-tagged.appspot.com",
+    messagingSenderId: "586030490192"
+  };
+  firebase.initializeApp(config);
+  var database = firebase.database();
+  var userRef = database.ref("users/");
 
 
 
-
-
-
-
-   // Steam api =========================================================================================================================
-   function getSteamId(steamId) {
+  // Steam api =========================================================================================================================
+  function getSteamId(steamId) {
     // Fetch steam user ID number
     var queryURL = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + steamId
     $.ajax({
-       url: queryURL,
-       method: "GET"
+      url: queryURL,
+      method: "GET"
     }).then(function (data) {
-     
-       var steamNumber = data.response.steamid;
-     
-       getSteamProfile(steamNumber);
-       
+
+      var steamNumber = data.response.steamid;
+
+      getSteamProfile(steamNumber);
+
     })
- }
-//  get steam ID from vanity URL search
- $("#steam-submit").on("click", function(){
+  }
+  //  get steam ID from vanity URL search
+  $("#steam-submit").on("click", function () {
     event.preventDefault();
     var steamId = $("#steam-input").val().trim();
-    
-   getSteamId(steamId);
- })
+
+    getSteamId(steamId);
+  })
 
 
- // Fetch steam user profile page
+  // Fetch steam user profile page
 
- // nick's steam ID for testing purposes: 76561197972752173
+  // nick's steam ID for testing purposes: 76561197972752173
 
- function getSteamProfile(number) {
+  function getSteamProfile(number) {
     var queryURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + number;
     $.ajax({
-       url: queryURL,
-       method: "GET"
+      url: queryURL,
+      method: "GET"
     }).then(function (data) {
 
 
-     var avatar = data.response.players[0].avatarmedium;
-     var playerOnline;
-     var image = $("<img src='" + avatar + "' />")
-    //  curUser.avatar = image;
-    //  $("#image-share").html(image);
-     var name = $("<h3>").text(data.response.players[0].personaname)
-     var lastLogOff = data.response.players[0].lastlogoff;
-     var newDate = $.parseJSON(lastLogOff);
-     var formatDate = new Date(1000*newDate);
-     var lastOnline = $("<p>").text("Last online: " + formatDate);
-     // check if online 
-     var online = data.response.players[0].personastate;
-     if (online === 0){
-       online = "no";
-     } else if (online === 1){
-       online = "yes";
-     }
-    playerOnline = $("<p>").text("online: " + online)
-    
-     $("#steam-div").append(image, name, playerOnline, lastOnline);
-    })
- }
+      var avatar = data.response.players[0].avatarmedium;
+      var playerOnline;
+      var image = $("<img src='" + avatar + "' />")
+      //  curUser.avatar = image;
+      //  $("#image-share").html(image);
+      var name = $("<h3>").text(data.response.players[0].personaname)
+      var lastLogOff = data.response.players[0].lastlogoff;
+      var newDate = $.parseJSON(lastLogOff);
+      var formatDate = new Date(1000 * newDate);
+      var lastOnline = $("<p>").text("Last online: " + formatDate);
+      // check if online 
+      var online = data.response.players[0].personastate;
+      if (online === 0) {
+        online = "no";
+      } else if (online === 1) {
+        online = "yes";
+      }
+      playerOnline = $("<p>").text("online: " + online)
 
- // ==================================================================================================================================
+      $("#steam-div").append(image, name, playerOnline, lastOnline);
+    })
+  }
+
+  // ==================================================================================================================================
 
   // xboxAPI key 40687e73c58e72dd8d225be86a8a11de96b04dda
 
@@ -162,9 +168,22 @@ $(document).ready(function () {
     var newGame = searchResults[x]; //grabs game title from searchResults array
     gameLibrary.push(newGame); //adds to libray variable
     console.log(gameLibrary)
-    // still need to add to game library DIV on profile page
+  
+    
     // store within firebase
 
+  })
+
+  $(document).on("click", "#library-refresh", function(){
+    event.preventDefault();
+    var list = $("<ul>");
+    $("#library").append(list);
+    for(i=0; i<gameLibrary.length; i++){
+      
+      var listItem = $("<li>");
+      listItem.text(gameLibrary[i]);
+      $("#library").append(listItem);
+    }
   })
 
 
@@ -175,9 +194,9 @@ $(document).ready(function () {
 
   // object that will hold user profile locally
   var curUser = {
+    username: "",
     firstName: "",
     lastName: "",
-    username: "",
     email: "",
     avatar: "",
     steamName: "",
@@ -186,28 +205,38 @@ $(document).ready(function () {
     nintendoId: "",
     aboutMe: "",
     status: "",
-    friends: []
+    // friends: []
     // will add more later
   }
 
   $(document).on("click", "#profile-submit", function () {
-    curUser.firstName = ("#first_name").val().trim();
-    curUser.lastName = ("#last_name").val().trim();
-    curUser.username = ("username").val().trim();
-    curUser.email = ("#email").val().trim();
-    curUser.steamName = ("#steam-name").val().trim();
-    curUser.psnName = ("#psn-name").val().trim();
-    curUser.xboxName = ("#gamer-tag").val().trim();
-    curUser.nintendoId = ("#nintendo-id").val().trim();
-    curUser.aboutMe = ("#about-input").val().trim();
+    event.preventDefault();
+    curUser.firstName = $("#firstname").val();
+    curUser.lastName = $("#lastname").val();
+    curUser.username = $("#username").val();
+    curUser.email = $("#email").val();
+    curUser.steamName = $("#steam-name").val();
+    curUser.psnName = $("#psn-name").val();
+    curUser.xboxName = $("#gamer-tag").val();
+    curUser.nintendoId = $("#nintendo-id").val();
+    curUser.aboutMe = $("#about-input").val();
 
     // print and format data to DIV containing user info on profile page
     // store data into firebase
-    database.ref("profile/users/").push({
-      name: curUser.firstName,
-  
+    database.ref("users/").push({
+      [curUser.username]: {
+        username: curUser.username,
+        firstname: curUser.firstName,
+        lastName: curUser.lastName,
+        email: curUser.email,
+        steamName: curUser.steamName,
+        psnName: curUser.psnName,
+        xboxName: curUser.xboxName,
+      }
+
     })
   })
+  
 
   $('.carousel.carousel-slider').carousel({
     fullWidth: true,
@@ -218,41 +247,41 @@ $(document).ready(function () {
   $('.sidenav').sidenav();
   $('.tabs').tabs({ swipeable: true });
 
-   setInterval(function () {
-      $('.carousel').carousel('next');
-   }, 5000);
+  setInterval(function () {
+    $('.carousel').carousel('next');
+  }, 5000);
 
-// find steam id.....
-$(document).on("click", "#get-steam", function(){
-  event.preventDefault();
-  var vanityName = $("#steam-name").val().trim();
-  getSteamName(vanityName)
-})
-function getSteamName(name){
-  // Fetch steam user ID number
-  var queryURL = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + name
-  $.ajax({
-     url: queryURL,
-     method: "GET"
-  }).then(function (data) {
-   
-     var steamNumber = data.response.steamid;
-   
-     returnSteamName(steamNumber);
-     
+  // find steam id.....
+  $(document).on("click", "#get-steam", function () {
+    event.preventDefault();
+    var vanityName = $("#steam-name").val().trim();
+    getSteamName(vanityName)
   })
-}
-function returnSteamName(id){
-  var queryURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + id;
+  function getSteamName(name) {
+    // Fetch steam user ID number
+    var queryURL = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + name
     $.ajax({
-       url: queryURL,
-       method: "GET"
+      url: queryURL,
+      method: "GET"
+    }).then(function (data) {
+
+      var steamNumber = data.response.steamid;
+
+      returnSteamName(steamNumber);
+
+    })
+  }
+  function returnSteamName(id) {
+    var queryURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + id;
+    $.ajax({
+      url: queryURL,
+      method: "GET"
     }).then(function (data) {
       var steamName = data.response.players[0].personaname;
       console.log(steamName)
       $("#steam-name").val(steamName);
     })
-}
+  }
 
 
 })
@@ -262,39 +291,54 @@ function returnSteamName(id){
 
 // creating a dynamic jpg of user id's
 function draw() {
-// text
-var par = document.getElementById('canvas').getContext('2d');
-par.font = '30px serif';
-par.fillText("Gamer ID Card", 8, 40);
-// psn name
-if(curUser.psnName !== undefined){
-par.fillText("psn: " + curUser.psnName, 220, 100);
-} else { 
-  par.fillText("psn: none", 220, 100);
+  // text
+  var par = document.getElementById('canvas').getContext('2d');
+  par.font = '30px serif';
+  par.fillText("Gamer ID Card", 8, 40);
+  // psn name
+  if (curUser.psnName !== undefined) {
+    par.fillText("psn: " + curUser.psnName, 220, 100);
+  } else {
+    par.fillText("psn: none", 220, 100);
+  }
+  // xbox name
+  if (curUser.xboxName !== undefined) {
+    par.fillText("xbox: " + curUser.xboxName, 220, 150);
+  } else {
+    par.fillText("xbox: none", 220, 150);
+  }
+  // steam name
+  if (curUser.steamName !== undefined) {
+    par.fillText("steam: " + curUser.steamName, 220, 200);
+  } else {
+    par.fillText("steam: none", 220, 200);
+  }
+
+  // avatar image
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
 }
-// xbox name
-if(curUser.xboxName !== undefined){
-par.fillText("xbox: " + curUser.xboxName, 220, 150);
+
+// populate profile page
+function populatePage(){
+// username
+$("#profile-name").html("<h1>" + curUser.username + "<h1>");
+// status
+if (curUser.status !== undefined){
+$("#status").html("<p>" + curUser.status + "</p>");
 } else {
-  par.fillText("xbox: none", 220, 150);
+  $("#status").html("<p>Update your status here</p>");
+} 
+// game library
+// 
 }
-// steam name
-if(curUser.steamName !== undefined){
-par.fillText("steam: " + curUser.steamName, 220, 200);
-} else {
-  par.fillText("steam: none", 220, 200);
-}
-
-// avatar image
-var ctx = canvas.getContext('2d');
-ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
-}
-
-
-
+populatePage();
 
 // start page floating button
 $('.fixed-action-btn').floatingActionButton();
+
+// tabs
+$('.tabs').tabs();
 
 
 
