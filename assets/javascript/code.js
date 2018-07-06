@@ -182,59 +182,7 @@ $(document).ready(function () {
 
 
 
-  // steam API start ===============================================================================================>>>>
-
-
-  // find steam id from create profile page
-  $(document).on("click", "#get-steam", function () {
-    event.preventDefault();
-    var vanityName = $("#steam-name").val().trim();
-    getSteamName(vanityName)
-  })
-  function getSteamName(name) {
-    // Fetches steam user ID number
-    var queryURL = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + name
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function (data) {
-
-      var steamNumber = data.response.steamid;
-
-      returnSteamName(steamNumber);
-
-    })
-  }
-  function returnSteamName(id) {
-    var queryURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + id;
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function (data) {
-      var steamName = data.response.players[0].personaname;
-      console.log(steamName)
-      $("#steam-name").val(steamName);
-      curUser.avatar = data.response.players[0].avatarmedium;
-     
-      //  $("#image-share").html(image);
-      var lastLogOff = data.response.players[0].lastlogoff;
-      var newDate = $.parseJSON(lastLogOff);
-      var formatDate = new Date(1000 * newDate);
-      curUser.steamLastOnline = formatDate
-      // store in firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-      // check if online 
-      var online = data.response.players[0].personastate;
-      if (online === 0) {
-        curUser.steamOnline = "no"
-      } else if (online === 1) {
-        curUser.steamOnline = "yes"
-      }
-      // store in firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    })
-  }
-
-// steam API end <<<================================================================================
+  
 
 
 
