@@ -1,3 +1,17 @@
+
+// firebase
+var config = {
+  apiKey: "AIzaSyBCCCo7SJJGH4kO-BeDnXvTYULEhCUjdd0",
+  authDomain: "gamer-tagged.firebaseapp.com",
+  databaseURL: "https://gamer-tagged.firebaseio.com",
+  projectId: "gamer-tagged",
+  storageBucket: "gamer-tagged.appspot.com",
+  messagingSenderId: "586030490192"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+var userRef = database.ref("users/");
 // object that will hold user profile locally
 var curUser = {
   username: "",
@@ -14,6 +28,8 @@ var curUser = {
   steamOnline: "",
   steamLastOnline: ""
 }
+// firebase variables
+
 
 $(document).ready(function () {
 
@@ -29,17 +45,8 @@ $(document).ready(function () {
   // };
   // firebase.initializeApp(config);
 
-  var config = {
-    apiKey: "AIzaSyBCCCo7SJJGH4kO-BeDnXvTYULEhCUjdd0",
-    authDomain: "gamer-tagged.firebaseapp.com",
-    databaseURL: "https://gamer-tagged.firebaseio.com",
-    projectId: "gamer-tagged",
-    storageBucket: "gamer-tagged.appspot.com",
-    messagingSenderId: "586030490192"
-  };
-  firebase.initializeApp(config);
-  var database = firebase.database();
-  var userRef = database.ref("users/");
+ 
+ 
 
 
 
@@ -220,8 +227,8 @@ $(document).ready(function () {
 
     // print and format data to DIV containing user info on profile page
     // store data into firebase
-    database.ref("users/").push({
-      [curUser.username]: {
+    database.ref("users/" + curUser.username).update({
+      
         username: curUser.username,
         firstname: curUser.firstName,
         lastName: curUser.lastName,
@@ -229,7 +236,7 @@ $(document).ready(function () {
         steamName: curUser.steamName,
         psnName: curUser.psnName,
         xboxName: curUser.xboxName,
-      }
+      
 
     })
   })
@@ -406,6 +413,7 @@ $("#formValidate").validate({
     }
   }
 });
+$('.fixed-action-btn').floatingActionButton();
   
 
 
