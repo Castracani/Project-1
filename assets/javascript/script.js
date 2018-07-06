@@ -40,6 +40,10 @@ $(document).ready(function () {
   }, 5000);
 
   $('.tabs').tabs({ swipeable: true });
+  
+  $('.fixed-action-btn').floatingActionButton();
+
+  $('.sidenav').sidenav();
 
   $('.modal').modal();
 
