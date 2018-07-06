@@ -106,15 +106,15 @@ $(document).ready(function () {
     var user = firebase.auth().currentUser;
     var email, uid;
 
-    // curUser.firstName = $("#firstname").val();
-    // curUser.lastName = $("#lastname").val();
-    // curUser.username = $("#username").val();
-    // curUser.email = $("#email").val();
-    // curUser.steamName = $("#steam-name").val();
-    // curUser.psnName = $("#psn-name").val();
-    // curUser.xboxName = $("#gamer-tag").val();
-    // curUser.nintendoId = $("#nintendo-id").val();
-    // curUser.aboutMe = $("#about-input").val();
+    curUser.firstName = $("#firstname").val();
+    curUser.lastName = $("#lastname").val();
+    curUser.username = $("#username").val();
+    curUser.email = $("#email").val();
+    curUser.steamName = $("#steam-name").val();
+    curUser.psnName = $("#psn-name").val();
+    curUser.xboxName = $("#gamer-tag").val();
+    curUser.nintendoId = $("#nintendo-id").val();
+    curUser.aboutMe = $("#about-input").val();
 
 
 
@@ -131,16 +131,16 @@ $(document).ready(function () {
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
       var providerData = user.providerData;
-      // var database = firebase.database();
-      // database.ref('users/' + uid).set({
-      //   username: curUser.username,
-      //   firstname: curUser.firstName,
-      //   lastName: curUser.lastName,
-      //   email: curUser.email,
-      //   steamName: curUser.steamName,
-      //   psnName: curUser.psnName,
-      //   xboxName: curUser.xboxName,
-      // });
+      var database = firebase.database();
+      database.ref('users/' + uid).set({
+        username: curUser.username,
+        firstname: curUser.firstName,
+        lastName: curUser.lastName,
+        email: curUser.email,
+        steamName: curUser.steamName,
+        psnName: curUser.psnName,
+        xboxName: curUser.xboxName,
+      });
 
       console.log(email, isAnonymous, uid, providerData);
       localStorage.setItem("username", username);
@@ -160,10 +160,8 @@ $(document).ready(function () {
   });
 
   $("#submit-btn").click(function (user) {
-    console.log("I'm working!!!");
     var email = $("#email").val().trim();
     var password = $("#id_pwd").val().trim();
-    var
     if (user != null) {
       firebase.auth().signOut();
     }
@@ -181,26 +179,7 @@ $(document).ready(function () {
         var errorMessage = error.message;
         window.alert("Error: " + errorMessage);
       });
-
-    curUser.firstName = $("#firstname").val();
-    curUser.lastName = $("#lastname").val();
-    curUser.username = $("#username").val();
-    curUser.email = $("#email").val();
-    curUser.steamName = $("#steam-name").val();
-    curUser.psnName = $("#psn-name").val();
-    curUser.xboxName = $("#gamer-tag").val();
-
-    var database = firebase.database();
-    database.ref('users/' + uid).set({
-      username: curUser.username,
-      firstname: curUser.firstName,
-      lastName: curUser.lastName,
-      email: curUser.email,
-      steamName: curUser.steamName,
-      psnName: curUser.psnName,
-      xboxName: curUser.xboxName,
-    });
-
+    
   });
 
 
@@ -229,13 +208,13 @@ $(document).ready(function () {
           var errorMessage = error.message;
           window.alert("Error: " + errorMessage);
         });
-
-
+        
+      
     }
-
+  
   });
   firebase.auth().onAuthStateChanged(user => {
-    if (user) {
+    if(user) {
       window.location = 'profile.html'; //After successful login, user will be redirected to home.html
     }
   });
