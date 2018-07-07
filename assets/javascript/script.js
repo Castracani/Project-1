@@ -119,6 +119,7 @@ $(document).ready(function () {
     curUser.xboxName = $("#gamer-tag").val();
     curUser.nintendoId = $("#nintendo-id").val();
     curUser.aboutMe = $("#about-input").val();
+    
 
 
 
@@ -144,6 +145,7 @@ $(document).ready(function () {
         steamName: curUser.steamName,
         psnName: curUser.psnName,
         xboxName: curUser.xboxName,
+        avatar: curUser.avatar
       });
 
       console.log(email, isAnonymous, uid, providerData);
@@ -254,7 +256,7 @@ $(document).ready(function () {
 
     })
   }
-  
+
   function returnSteamName(id) {
     var queryURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + id;
     $.ajax({

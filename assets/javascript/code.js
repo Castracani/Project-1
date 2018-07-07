@@ -26,7 +26,8 @@ var curUser = {
   aboutMe: "",
   status: "",
   steamOnline: "",
-  steamLastOnline: ""
+  steamLastOnline: "",
+  gameLibrary: []
 }
 
 
@@ -38,7 +39,7 @@ $(document).ready(function () {
 
   // giantbomb API start (for game library) =================================================================>>>
   
-  var gameLibrary = [];
+  var newLibrary = [];
   var searchResults = [];
 
   function addGames(game) {
@@ -58,7 +59,7 @@ $(document).ready(function () {
       searchResults = [];
       for (i = 0; i < 10; i++) {
         //  game icon
-        var gameImg = results[i].image.icon_url;
+        var gameImg = results[i].image.small_url;
         var image = $("<img src='" + gameImg + "' />")
         //  game name
         var gameName = $("<h3>").text(results[i].name)
@@ -84,7 +85,7 @@ $(document).ready(function () {
         //  create a horizontal line
         var hr = $("<hr>")
         //  push game to search array
-        searchResults.push(results[i].name);
+        searchResults.push(results[i].image.small_url);
 
         $("#search-results").append(gameName, image, gameInfo, gameRelease, newButton, hr)
       }
@@ -114,14 +115,14 @@ $(document).ready(function () {
     var x = $(this).val(); //grabs value that will match location within array and assigns to a new variable
 
     var newGame = searchResults[x]; //grabs game title from searchResults array
-    gameLibrary.push(newGame); //adds to libray variable
-    console.log(gameLibrary)
-  
+    newLibrary.push(newGame); //adds to libray variable
+    console.log(newLibrary)
+ 
     
-    // store within firebase !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    database.ref("users/" + curUser.username).update({
-      gamelibrary: gameLibrary
+    database.ref("users/" + uid).update({
+      gamelibrary: newLibrary
     })
+
   })
 
   $(document).on("click", "#library-refresh", function(){
@@ -158,9 +159,6 @@ $(document).ready(function () {
     curUser.aboutMe = $("#about-input").val();
 
     // set local storage
-    localStorage.setItem("firstname", curUser.firstName);
-    localStorage.setItem("lastname", curUser.lastName);
-    localStorage.setItem("username", curUser.username);
 
 
     // store data into firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -190,31 +188,10 @@ $(document).ready(function () {
 
 // populate profile page start ==================================================================>>>>
 
-// need to add onload="populatePage();" to <body> of page <---------------------!!!!!!
 
 
-function populatePage(){
-
-// This will all be populated with firebase!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-// username
-
-// $("#nameOfUser").html("<h1>" + firebase variable will go here + "</h1>") 
 
 
-// screen names
-
-
-// status
-
-// game library
-
-// Gamer ID card
-
-// contact
-
-// 
-}
 // populate profile page end  <<<<==================================================================
 
 
@@ -267,7 +244,7 @@ $('.carousel.carousel-slider').carousel({
 
 $('.sidenav').sidenav();
 
-$('.tabs').tabs({ swipeable: true });
+$('.tabs').tabs();
 
 setInterval(function () {
   $('.carousel').carousel('next');
@@ -284,63 +261,46 @@ $("#signout-btn").click(function () {
 
 })
 
-
-
-
-
-
-
-
-// // Steam api =========================================================================================================================
+function populatePage(){
   
-// function getSteamId(steamId) {
-//   // Fetch steam user ID number
-//   var queryURL = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + steamId
-//   $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//   }).then(function (data) {
+  firebase.auth().onAuthStateChanged( user => {
 
-//     var steamNumber = data.response.steamid;
+    firebase.database().ref('/users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+   
+      console.log(snapshot.val().firstname);
 
-//     getSteamProfile(steamNumber);
+       // // username
+    $("#nameOfUser").html("<h1>" + snapshot.val().username + "</h1>");
+    // // status
+    $("#status").html("<p>" + snapshot.val().status + "</p>");
+    // // avatar
+    $("#profileImage").html("<img src='" + snapshot.val().avatar + "' />");
+    // // psn
+    $("#playStationUsername").html("<p>" + snapshot.val().psnName + "</p>");
+    // // xbox
+    $("#xboxUsername").html("<p>" + snapshot.val().xboxName + "</p>");
+    // // steam
+    $("#steamUsername").html("<p>" + snapshot.val().steamName + "</p>");
+    // // game library
+    var library = snapshot.val().gameLibrary
+    for(i=0; i<library.length; i++){
+      var newImage = $("<img src='" + library[i] + "' />");
+      $("#library").append(newImage);
+    }
+    });
+   
+   });
 
-//   })
-// }
-// //  get steam ID from vanity URL search
-// $("#steam-submit").on("click", function () {
-//   event.preventDefault();
-//   var steamId = $("#steam-input").val().trim();
-
-//   getSteamId(steamId);
-// })
 
 
-// // Fetch steam user profile page
 
-// // nick's steam ID for testing purposes: 76561197972752173
 
-// function getSteamProfile(number) {
-//   var queryURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + number;
-//   $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//   }).then(function (data) {
-//     // save avatar
-//     curUser.avatar = data.response.players[0].avatarmedium;
-//     // last online
-//     var lastLogOff = data.response.players[0].lastlogoff;
-//     var newDate = $.parseJSON(lastLogOff);
-//     var formatDate = new Date(1000 * newDate);
-//     curUser.steamLastOnline = formatDate
-//     // check if online 
-//     var online = data.response.players[0].personastate;
-//     if (online === 0) {
-//       curUser.steamOnline = "no"
-//     } else if (online === 1) {
-//       curUser.steamOnline = "yes"
-//     }
-    
-//   })
-// }
-// // ==================================================================================================================================
+   
+
+}
+
+
+
+
+
+
