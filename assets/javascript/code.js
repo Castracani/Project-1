@@ -1,20 +1,20 @@
 
 // firebase
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBZvq3N02QOEG6fa-6qiDLwOHoSeIBza0Q",
-    authDomain: "game-website-9813e.firebaseapp.com",
-    databaseURL: "https://game-website-9813e.firebaseio.com",
-    projectId: "game-website-9813e",
-    storageBucket: "game-website-9813e.appspot.com",
-    messagingSenderId: "70919236665"
-  };
-  firebase.initializeApp(config);
-  var database = firebase.database();
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBZvq3N02QOEG6fa-6qiDLwOHoSeIBza0Q",
+  authDomain: "game-website-9813e.firebaseapp.com",
+  databaseURL: "https://game-website-9813e.firebaseio.com",
+  projectId: "game-website-9813e",
+  storageBucket: "game-website-9813e.appspot.com",
+  messagingSenderId: "70919236665"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
 
-  // maybe set these values initally to the firebase values?
+// maybe set these values initally to the firebase values?
 var curUser = {
-  username: "", 
+  username: "",
   firstName: "",
   lastName: "",
   email: "",
@@ -30,14 +30,13 @@ var curUser = {
 }
 
 
-
 $(document).ready(function () {
 
 
-  
+
 
   // giantbomb API start (for game library) =================================================================>>>
-  
+
   var gameLibrary = [];
   var searchResults = [];
 
@@ -97,7 +96,7 @@ $(document).ready(function () {
 
   }
 
-    // game search input+++++++++++++++++++++++++++++++++++++++++
+  // game search input+++++++++++++++++++++++++++++++++++++++++
 
   $("#search-game").on("click", function (event) {
     event.preventDefault();
@@ -107,29 +106,29 @@ $(document).ready(function () {
   })
 
 
-    // add game to library
-  
-    $(document).on("click", ".add-game", function () {
+  // add game to library
+
+  $(document).on("click", ".add-game", function () {
     event.preventDefault();
     var x = $(this).val(); //grabs value that will match location within array and assigns to a new variable
 
     var newGame = searchResults[x]; //grabs game title from searchResults array
     gameLibrary.push(newGame); //adds to libray variable
     console.log(gameLibrary)
-  
-    
+
+
     // store within firebase !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     database.ref("users/" + curUser.username).update({
       gamelibrary: gameLibrary
     })
   })
 
-  $(document).on("click", "#library-refresh", function(){
+  $(document).on("click", "#library-refresh", function () {
     event.preventDefault();
     var list = $("<ul>");
     $("#library").append(list);
-    for(i=0; i<gameLibrary.length; i++){
-      
+    for (i = 0; i < gameLibrary.length; i++) {
+
       var listItem = $("<li>");
       listItem.text(gameLibrary[i]);
       $("#library").append(listItem);
@@ -165,15 +164,15 @@ $(document).ready(function () {
 
     // store data into firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     database.ref("users/" + curUser.username).update({
-      
-        username: curUser.username,
-        firstname: curUser.firstName,
-        lastName: curUser.lastName,
-        email: curUser.email,
-        steamName: curUser.steamName,
-        psnName: curUser.psnName,
-        xboxName: curUser.xboxName,
-      
+
+      username: curUser.username,
+      firstname: curUser.firstName,
+      lastName: curUser.lastName,
+      email: curUser.email,
+      steamName: curUser.steamName,
+      psnName: curUser.psnName,
+      xboxName: curUser.xboxName,
+
 
     })
   })
@@ -182,107 +181,169 @@ $(document).ready(function () {
 
 
 
+<<<<<<< HEAD
+  // steam API start ===============================================================================================>>>>
+
+
+  // find steam id from create profile page
+  $(document).on("click", "#get-steam", function () {
+    event.preventDefault();
+    var vanityName = $("#steam-name").val().trim();
+    getSteamName(vanityName)
+  })
+  function getSteamName(name) {
+    // Fetches steam user ID number
+    var queryURL = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + name
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function (data) {
+
+      var steamNumber = data.response.steamid;
+
+      returnSteamName(steamNumber);
+
+    })
+  }
+  function returnSteamName(id) {
+    var queryURL = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=597FC535B0A81C139B5227A808EAA15B&steamids=" + id;
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function (data) {
+      var steamName = data.response.players[0].personaname;
+      console.log(steamName)
+      $("#steam-name").val(steamName);
+      curUser.avatar = data.response.players[0].avatarmedium;
+
+      //  $("#image-share").html(image);
+      var lastLogOff = data.response.players[0].lastlogoff;
+      var newDate = $.parseJSON(lastLogOff);
+      var formatDate = new Date(1000 * newDate);
+      curUser.steamLastOnline = formatDate
+      // store in firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+      // check if online 
+      var online = data.response.players[0].personastate;
+      if (online === 0) {
+        curUser.steamOnline = "no"
+      } else if (online === 1) {
+        curUser.steamOnline = "yes"
+      }
+      // store in firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    })
+  }
+
+  // steam API end <<<================================================================================
+=======
   
+>>>>>>> 9756742b4d37afbcba856b7558e4f24487676aca
 
 
 
-  
-
-// populate profile page start ==================================================================>>>>
-
-// need to add onload="populatePage();" to <body> of page <---------------------!!!!!!
 
 
-function populatePage(){
+  // populate profile page start ==================================================================>>>>
 
-// This will all be populated with firebase!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-// username
-
-// $("#nameOfUser").html("<h1>" + firebase variable will go here + "</h1>") 
+  // need to add onload="populatePage();" to <body> of page <---------------------!!!!!!
 
 
-// screen names
+  function populatePage() {
+
+    // This will all be populated with firebase!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // username
+
+    // $("#nameOfUser").html("<h1>" + firebase variable will go here + "</h1>") 
 
 
-// status
-
-// game library
-
-// Gamer ID card
-
-// contact
-
-// 
-}
-// populate profile page end  <<<<==================================================================
+    // screen names
 
 
+    // status
 
-// gamer id card start ==================================================================>>>>
+    // game library
 
-// need to add onload="draw();" to body of page <---------------------!!!!!!
-function draw() {
-  // text
-  var par = document.getElementById('canvas').getContext('2d');
-  par.font = '30px serif';
-  par.fillText("Gamer ID Card", 8, 40);
-  // psn name
-  if (curUser.psnName !== undefined) {
-    par.fillText("psn: " + curUser.psnName, 220, 100);
-  } else {
-    par.fillText("psn: none", 220, 100);
+    // Gamer ID card
+
+    // contact
+
+    // 
   }
-  // xbox name
-  if (curUser.xboxName !== undefined) {
-    par.fillText("xbox: " + curUser.xboxName, 220, 150);
-  } else {
-    par.fillText("xbox: none", 220, 150);
+  // populate profile page end  <<<<==================================================================
+
+
+
+  // gamer id card start ==================================================================>>>>
+
+  // need to add onload="draw();" to body of page <---------------------!!!!!!
+  function draw() {
+    // text
+    var par = document.getElementById('canvas').getContext('2d');
+    par.font = '30px serif';
+    par.fillText("Gamer ID Card", 8, 40);
+    // psn name
+    if (curUser.psnName !== undefined) {
+      par.fillText("psn: " + curUser.psnName, 220, 100);
+    } else {
+      par.fillText("psn: none", 220, 100);
+    }
+    // xbox name
+    if (curUser.xboxName !== undefined) {
+      par.fillText("xbox: " + curUser.xboxName, 220, 150);
+    } else {
+      par.fillText("xbox: none", 220, 150);
+    }
+    // steam name
+    if (curUser.steamName !== undefined) {
+      par.fillText("steam: " + curUser.steamName, 220, 200);
+    } else {
+      par.fillText("steam: none", 220, 200);
+    }
+
+    // avatar image
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
   }
-  // steam name
-  if (curUser.steamName !== undefined) {
-    par.fillText("steam: " + curUser.steamName, 220, 200);
-  } else {
-    par.fillText("steam: none", 220, 200);
-  }
 
-  // avatar image
-  var ctx = canvas.getContext('2d');
-  ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
-}
+  // gamer id card ends  <<<==================================================================
 
-// gamer id card ends  <<<==================================================================
+  // start page floating button
+  $('.fixed-action-btn').floatingActionButton();
 
-// start page floating button
-$('.fixed-action-btn').floatingActionButton();
+  // tabs
+  $('.tabs').tabs();
 
-// tabs
-$('.tabs').tabs();
+  $('.carousel.carousel-slider').carousel({
+    fullWidth: true,
+    indicators: true,
+    next: 3
+  });
 
-$('.carousel.carousel-slider').carousel({
-  fullWidth: true,
-  indicators: true,
-  next: 3
-});
+  $('.sidenav').sidenav();
 
-$('.sidenav').sidenav();
+  $('.tabs').tabs({ swipeable: true });
 
-$('.tabs').tabs({ swipeable: true });
-
-setInterval(function () {
-  $('.carousel').carousel('next');
-}, 5000);
+  setInterval(function () {
+    $('.carousel').carousel('next');
+  }, 5000);
 
 
-$("#signout-btn").click(function () {
-  firebase.auth().signOut();
-  localStorage.clear();
-  window.location = "startpage.html";
+  $("#signout-btn").click(function () {
+    firebase.auth().signOut();
+    localStorage.clear();
+    window.location = "startpage.html";
 
-});
+  });
 
 
 })
+
+firebase.auth().onAuthStateChanged( user => {
+
+  console.log(user.uid);
+
+});
 
 
 
@@ -292,7 +353,7 @@ $("#signout-btn").click(function () {
 
 
 // // Steam api =========================================================================================================================
-  
+
 // function getSteamId(steamId) {
 //   // Fetch steam user ID number
 //   var queryURL = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=597FC535B0A81C139B5227A808EAA15B&vanityurl=" + steamId
@@ -340,7 +401,7 @@ $("#signout-btn").click(function () {
 //     } else if (online === 1) {
 //       curUser.steamOnline = "yes"
 //     }
-    
+
 //   })
 // }
 // // ==================================================================================================================================
