@@ -29,7 +29,7 @@ var curUser = {
   steamLastOnline: "",
   gameLibrary: []
 }
-var counter = -1;
+
 
 
 
@@ -61,7 +61,7 @@ $(document).ready(function () {
       for (i = 0; i < 10; i++) {
         //  game icon
         var gameImg = results[i].image.small_url;
-        var image = $("<img src='" + gameImg + "' />")
+        var image = $("<img src='" + gameImg + "' height='300px';width:auto/>")
         //  game name
         var gameName = $("<h3>").text(results[i].name)
         //  is there a release date available? if so...
@@ -111,12 +111,12 @@ $(document).ready(function () {
     // add game to library
   
     $(document).on("click", ".add-game", function () {
-    counter++;
+    
     event.preventDefault();
     var x = $(this).val(); //grabs value that will match location within array and assigns to a new variable
 
     var newGame = searchResults[x]; //grabs game title from searchResults array
-    localStorage.setItem("game-" + counter, newGame);
+    
     newLibrary.push(newGame); //adds to libray variable
     localStorage.setItem("gamesArr", JSON.stringify(newLibrary))
     console.log(newLibrary)
@@ -178,8 +178,9 @@ $("#signout-btn").click(function () {
 })
 
 function populatePage(){
-  draw();
+  // draw();
   // game library
+  if(localStorage.getItem("gamesArr") !== null){
   var retrievedData = localStorage.getItem("gamesArr");
   var gamesLibrary = JSON.parse(retrievedData);
   for(i=0; i<gamesLibrary.length; i++){
@@ -187,6 +188,7 @@ function populatePage(){
     $("#library").append(newImage);
 
   }
+}
   firebase.auth().onAuthStateChanged( user => {
 
     firebase.database().ref('/users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
@@ -208,7 +210,11 @@ function populatePage(){
       $("#status").html("<p>Update your status here</p>");
     }
     // // avatar
+    if(snapshot.val().status !== undefined){
     $("#profileImage").html("<img src='" + snapshot.val().avatar + "' />");
+    } else {
+      $("#profileImage").html("<img src='assets/images/empty-photo.jpg' />");
+    }
     // // psn
     $("#playStationUsername").html(snapshot.val().psnName);
     // // xbox
@@ -239,7 +245,31 @@ function populatePage(){
 
 
 
-
+  //  / Get the modal
+   var modal = document.getElementById('modalEditStatus');
+   
+   // Get the button that opens the modal
+   var btn = document.getElementById("buttonEditStatus");
+   
+   // Get the <span> element that closes the modal
+   var span = document.getElementsByClassName("close")[0];
+   
+   // When the user clicks the button, open the modal 
+   btn.onclick = function() {
+      modal.style.display = "block";
+   }
+   
+   // When the user clicks on <span> (x), close the modal
+   span.onclick = function() {
+      modal.style.display = "none";
+   }
+   
+   // When the user clicks anywhere outside of the modal, close it
+   window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+   }
 
    
 
