@@ -121,6 +121,13 @@ html {
     color: #9B93A3;
   }
 
+
+  .marginZero{
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+
+  }
+
   .card-color-light {
     background-color: #6e5e7c;
   }
