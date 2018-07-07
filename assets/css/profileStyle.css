@@ -156,6 +156,11 @@ html {
     width: 100%;
     opacity: 0.8;
   }
+
+.card-style {
+  margin-top: 0px !important;
+  margin-left: 250px !important;
+}
   
   @media (max-width: 500px) {
     .brand-logo{
