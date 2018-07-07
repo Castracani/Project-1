@@ -112,7 +112,7 @@ $(document).ready(function () {
 
     curUser.firstName = $("#firstname").val();
     curUser.lastName = $("#lastname").val();
-    curUser.username = $("#username").val();
+    curUser.userName = $("#username").val();
     curUser.email = $("#email").val();
     curUser.steamName = $("#steam-name").val();
     curUser.psnName = $("#psn-name").val();
@@ -138,7 +138,7 @@ $(document).ready(function () {
       var database = firebase.database();
       database.ref('users/' + uid).set({
         username: curUser.username,
-        firstname: curUser.firstName,
+        firstName: curUser.firstName,
         lastName: curUser.lastName,
         email: curUser.email,
         steamName: curUser.steamName,
