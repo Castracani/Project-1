@@ -196,7 +196,7 @@ function populatePage(){
       
 
        // // username
-       if(snapshot.val().username !== undefined){
+       if(snapshot.val().username !== null){
     $("#nameOfUser").html("<h1>" + snapshot.val().username + "</h1>");
        } else {
         $("#nameOfUser").html("<h1>John Smith</h1>");
