@@ -132,13 +132,7 @@ $(document).ready(function () {
 
   
 
-// change status
-$("#buttonEditStatus").on("click", function(){
-  var newSatus;
-  database.ref("users/" + firebase.auth().currentUser.uid).update({
-    status: newStatus
-  })
-})
+
 
 
 
@@ -202,9 +196,9 @@ function populatePage(){
         $("#nameOfUser").html("<h1>John Smith</h1>");
        }
     // real name
-    if (snapshot.val().firstname !== undefined && snapshot.val().lastname !== undefined) {
-    $("#real-name").html("<h3>(" + snapshot.val().firstname + " " + snapshot.val().lastname + ")</h3>");
-    } else if (snapshot.val().firstname !== undefined && snapshot.val().lastname == undefined){
+    if (snapshot.val().firstname !== null && snapshot.val().lastName !== null) {
+    $("#real-name").html("<h3>(" + snapshot.val().firstname + " " + snapshot.val().lastName + ")</h3>");
+    } else if (snapshot.val().firstname !== undefined && snapshot.val().lastName == null){
       $("#real-name").html("<h3>(" + snapshot.val().firstname + ")</h3>");
     }
     // // status
@@ -342,5 +336,11 @@ function draw() {
  
 }
 
-
-
+// change status
+$("#status-button").on("click", function(){
+  var newStatus = $("#status-input").val().trim();
+  database.ref("users/" + firebase.auth().currentUser.uid).update({
+    status: newStatus
+  })
+  $("#status").html("<p>" + newStatus + "</p>");
+})
