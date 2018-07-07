@@ -5,6 +5,10 @@
 #sideNavBar{
     margin:0px;
 }
+
+.tabs-padding {
+  padding: 0px !important;
+}
 .icon{
     margin-left:15px;
 }
@@ -24,7 +28,7 @@ body{
   font-family: 'Open Sans', sans-serif;
   letter-spacing:2px;
   line-height: 200%;
-
+  margin-bottom:45px;
 
 }
 
@@ -72,11 +76,9 @@ main{
 #sideBarContent{
     min-height: 85vh;
 }
-.profile{
-    margin:15px;
-}
+
 #test1, #test2, #test3, #test4{
-    margin-left:3px;
+    /* width:1063px; */
 }
 html {
     min-height: 100vh;
@@ -121,6 +123,9 @@ html {
     color: #9B93A3;
   }
 
+  .margin {
+    margin-top: 45px;
+  }
 
   .marginZero{
       padding-left: 0px !important;
@@ -129,7 +134,7 @@ html {
   }
 
   .card-color-light {
-    background-color: #6e5e7c;
+    background-color: #594170;
   }
   
   .icon {
