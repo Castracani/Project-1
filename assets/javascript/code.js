@@ -214,7 +214,7 @@ function populatePage(){
       $("#status").html("<p>Update your status here</p>");
     }
     // // avatar
-    if(snapshot.val().status !== undefined){
+    if(snapshot.val().avatar !== undefined){
     $("#profileImage").html("<img src='" + snapshot.val().avatar + "' />");
     } else {
       $("#profileImage").html("<img src='assets/images/empty-photo.jpg' />");

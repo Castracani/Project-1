@@ -266,22 +266,22 @@ $(document).ready(function () {
       var steamName = data.response.players[0].personaname;
       console.log(steamName)
       $("#steam-name").val(steamName);
-      curUser.avatar = data.response.players[0].avatarmedium;
+      curUser.avatar = data.response.players[0].avatarfull;
      
-      //  $("#image-share").html(image);
-      var lastLogOff = data.response.players[0].lastlogoff;
-      var newDate = $.parseJSON(lastLogOff);
-      var formatDate = new Date(1000 * newDate);
-      curUser.steamLastOnline = formatDate
-      // store in firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // //  $("#image-share").html(image);
+      // var lastLogOff = data.response.players[0].lastlogoff;
+      // var newDate = $.parseJSON(lastLogOff);
+      // var formatDate = new Date(1000 * newDate);
+      // curUser.steamLastOnline = formatDate
+      // // store in firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-      // check if online 
-      var online = data.response.players[0].personastate;
-      if (online === 0) {
-        curUser.steamOnline = "no"
-      } else if (online === 1) {
-        curUser.steamOnline = "yes"
-      }
+      // // check if online 
+      // var online = data.response.players[0].personastate;
+      // if (online === 0) {
+      //   curUser.steamOnline = "no"
+      // } else if (online === 1) {
+      //   curUser.steamOnline = "yes"
+      // }
       // store in firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     })
   }
