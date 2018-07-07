@@ -18,34 +18,30 @@
     <body onload="populatePage()">
         <main>
             <!-- NAVBAR -->
-            <div class "container">
+            <nav>
+                <div class="col s12 nav-wrapper hf-color">
+                    <a href="#!" class="brand-logo">
+                        <i class="material-icons icon">videogame_asset</i>Gamer Tagged</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <!-- Search bar in nav -->
 
-                <nav>
-                    <div class="nav-wrapper hf-color">
-                        <a href="#!" class="brand-logo">
-                            <i class="material-icons icon">videogame_asset</i>Gamer Tagged</a>
-                        <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-                            <i class="material-icons">menu</i>
-                        </a>
-                        <ul class="right hide-on-med-and-down">
-                            <li>
-                                <a class="waves-effect waves-light btn" id="signout-btn">Log Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a class="waves-effect waves-light btn" id="signout-btn">Log Out</a>
+                        </li>
+                    </ul>
 
-                <form class="sidenav" id="mobile-demo">
-                    <div class="input-field">
-                        <input id="search" type="search" required>
-                        <label class="label-icon" for="search">
-                            <i class="material-icons">search</i>
-                        </label>
-                        <i class="material-icons">close</i>
-                    </div>
-                </form>
-
-
+                </div>
+            </nav>
+            <!-- Mobile responsive search bar-->
+            <div class="sidenav" id="mobile-demo">
+                <ul>
+                    <li>
+                        <a class="waves-effect waves-light btn" id="signout-btn">Log Out</a>
+                    </li>
+                </ul>
             </div>
 
             <!--SIDEBAR-->
@@ -59,12 +55,18 @@
                         <div class="col m9 l9 profile">
                             <div class="row">
                                 <div class="col l11 push-l1 card-color">
-                                    <h2 class="header card-color"><span id="nameOfUser">John Smith</span></h2><span id="real-name"></span>
-                                    
+                                    <h2 class="header card-color">
+                                        <span id="nameOfUser">John Smith</span>
+                                    </h2>
+                                    <span id="real-name"></span>
+
                                     <div class="card horizontal card-color-light">
                                         <div class="card-image" id="profileImage">
-\                                            <img src="assets/images/profile picture Michael Scott.jpg">
-<a class="btn-floating btn-small waves-effect waves-light purple"id="buttonEditPicture"><i class="material-icons">create</i></a>
+                                            \
+                                            <img src="assets/images/profile picture Michael Scott.jpg">
+                                            <a class="btn-floating btn-small waves-effect waves-light purple" id="buttonEditPicture">
+                                                <i class="material-icons">create</i>
+                                            </a>
 
                                         </div>
                                         <div class="card-stacked">
@@ -77,7 +79,9 @@
                                                 <p>Last line: Lorem ipsum dolor sit amet. Lorem</p>
 
                                             </div>
-                                            <a class="btn-floating btn-small waves-effect waves-light purple"id="buttonEditStatus"><i class="material-icons">create</i></a>
+                                            <a class="btn-floating btn-small waves-effect waves-light purple" id="buttonEditStatus">
+                                                <i class="material-icons">create</i>
+                                            </a>
 
                                             <div class="card-action">
                                                 <ul>
@@ -85,21 +89,21 @@
                                                         <p>Psn:
                                                             <span id="playStationUsername">
 
-                                                            </p>
+                                                        </p>
                                                         </p>
                                                     </li>
                                                     <li>
                                                         <p>Xbox:
                                                             <span id="xboxUsername">
 
-                                                            </p>
+                                                        </p>
                                                         </p>
                                                     </li>
                                                     <li>
                                                         <p>Steam:
                                                             <span id="steamUsername">
 
-                                                            </p>
+                                                        </p>
                                                         </p>
                                                     </li>
 
@@ -107,7 +111,9 @@
                                                 </ul>
 
                                             </div>
-                                            <a class="btn-floating btn-small waves-effect waves-light purple"id="buttonEditPicture"><i class="material-icons">create</i></a>
+                                            <a class="btn-floating btn-small waves-effect waves-light purple" id="buttonEditPicture">
+                                                <i class="material-icons">create</i>
+                                            </a>
 
                                         </div>
                                     </div>
@@ -181,9 +187,15 @@
                                         <div class="card deep-orange lighten-1">
                                             <div class="card-content white-text">
                                                 <span class="card-title">Contact</span>
-                                                <p>First name: <span id="firstName"></span></p>
-                                                <p>last name: <span id="lastName"></span></p>
-                                                <p>Email: <span id="emailOfUser"></span></p>
+                                                <p>First name:
+                                                    <span id="firstName"></span>
+                                                </p>
+                                                <p>last name:
+                                                    <span id="lastName"></span>
+                                                </p>
+                                                <p>Email:
+                                                    <span id="emailOfUser"></span>
+                                                </p>
 
                                             </div>
                                             <div class="card-action">
@@ -201,13 +213,13 @@
                                                     ipsum dolor sit amet consectetur adipisicing elit. Laborum, omnis.
                                                 </p>
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- </div> -->
                     </div>
                 </div>
@@ -219,7 +231,7 @@
             </a>
             <ul>
                 <li>
-                    <a href="home.html" class="btn-floating green btn-large">
+                    <a href="index.html" class="btn-floating green btn-large">
                         <i class="large material-icons">home</i>
                     </a>
                 </li>

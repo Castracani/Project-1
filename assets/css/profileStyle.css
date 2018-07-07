@@ -24,8 +24,8 @@ body{
   font-family: 'Open Sans', sans-serif;
   letter-spacing:2px;
   line-height: 200%;
-
-
+  margin-bottom: 45px;
+  border-radius: 4px;
 }
 
 .imageResponsive{

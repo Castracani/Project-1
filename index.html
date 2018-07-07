@@ -9,7 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <!-- Firebase script -->
         <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
         <link rel="stylesheet" href="assets/css/profileStyle.css">
@@ -19,14 +21,16 @@
     <body>
         <main>
             <!-- NAVBAR -->
+
+
             <nav>
-                <div class="col s12 nav-wrapper hf-color">
+                <div class="nav-wrapper hf-color">
+
                     <a href="#!" class="brand-logo">
                         <i class="material-icons icon">videogame_asset</i>Gamer Tagged</a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger">
                         <i class="material-icons">menu</i>
                     </a>
-                    <!-- Search bar in nav -->
 
                     <ul class="right hide-on-med-and-down">
                         <li>
@@ -36,46 +40,47 @@
 
                 </div>
             </nav>
-            <!-- Mobile responsive search bar-->
+
             <div class="sidenav" id="mobile-demo">
+
                 <ul>
                     <li>
                         <a class="waves-effect waves-light btn" id="signout-btn">Log Out</a>
                     </li>
                 </ul>
+
             </div>
 
 
 
             <div class="container">
                 <div class="row">
-                    <div class="col s12 m12 l8 offset-l2 card-color-light card-margin">
+                    <div class="col s12 m12 l8 offset-l2 card-color card-margin ">
+
                         <h1 class="white-text center-align">
-                            <strong>About us</strong>
+                            <strong>Gamer Tagged</strong>
                         </h1>
-                        <div class="card">
-                            <div class="card-image imageResponsive">
-                                <img src="assets/images/mario and luigi.PNG">
-                                <span class="card-title">The best gaming website</span>
+                        <div class="card card-color-greenLight">
+                            <div class="card-image">
+                                <img src="assets/images/CaptureGameSpace.PNG">
+                                <span class="card-title">A new way of gaming</span>
                             </div>
-                            <div class="card-content ">
-                                <h6>
-                                    <strong>Why choose us?</strong>
-                                </h6>
-                                <h6>We are gamers ourselves so we know what kind of needs the average user has.</h6>
-                                <h6>
-                                    <strong>Also, we are a group of dedicated developers that will continue to update the webpage
-                                        to keep on improving your experience.
-                                    </strong>
-                                </h6>
+                            <div class="card-content card-color-greenLight">
+
+                                    <p>
+                                        Explore a freshing update to the gaming lifestyle by connecting with gamers globaly and make new friends with our adaptive
+                                        social experience. With Gamer Tagged you'll be able to connect with like minded people,
+                                        and share your legendary achievements in games from all your favorite platforms .
+                                        You'll be able to add your favorite games both current and old to your own library
+                                        of games to your personal profile.
+                                    </p>
+
                             </div>
                         </div>
 
                     </div>
-
                 </div>
             </div>
-
         </main>
 
         <!-- Floating Action Button -->
@@ -85,28 +90,30 @@
             </a>
             <ul>
                 <!-- Link to Home page -->
-                <li>
-                    <a href="index.html" class="btn-floating deep-purple btn-large">
-                        <i class="large material-icons">home</i>
-                    </a>
-                </li>
+
                 <!-- Link to Profile page -->
                 <li>
-                    <a href="profile.html" class="btn-floating indigo accent-3 btn-large">
+                    <a href="profile.html" class="btn-floating deep-purple btn-large">
                         <i class="large material-icons">face</i>
                     </a>
                 </li>
                 <!-- Link to Library page -->
                 <li>
-                    <a href="library.html" class="btn-floating cyan darken-4 btn-large">
+                    <a href="library.html" class="btn-floating indigo accent-3 btn-large">
                         <i class="large material-icons">library_add</i>
                     </a>
                     <!-- Link to AboutUs page -->
-                </li>
-                <li>
-                    <a href="startpage.html" class="btn-floating teal darken-1 btn-large">
-                        <i class="large material-icons">create</i>
-                    </a>
+                    <li>
+                        <a href="aboutUs.html" class="btn-floating cyan darken-4 btn-large">
+                            <i class="large material-icons">videogame_asset
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="startpage.html" class="btn-floating teal darken-1 btn-large">
+                            <i class="large material-icons">create</i>
+                        </a>
+                    </li>
                 </li>
             </ul>
         </div>
