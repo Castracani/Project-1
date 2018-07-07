@@ -86,7 +86,6 @@ $(document).ready(function () {
         var hr = $("<hr>")
         //  push game to search array
         searchResults.push(results[i].image.small_url);
-
         $("#search-results").append(gameName, image, gameInfo, gameRelease, newButton, hr)
       }
 
@@ -117,11 +116,6 @@ $(document).ready(function () {
     var newGame = searchResults[x]; //grabs game title from searchResults array
     newLibrary.push(newGame); //adds to libray variable
     console.log(newLibrary)
- 
-    
-    database.ref("users/" + uid).update({
-      gamelibrary: newLibrary
-    })
 
   })
 
@@ -162,7 +156,7 @@ $(document).ready(function () {
 
 
     // store data into firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    database.ref("users/" + curUser.username).update({
+    database.ref("users/" + firebase.auth().currentUser.uid).update({
       
         username: curUser.username,
         firstname: curUser.firstName,
@@ -177,56 +171,19 @@ $(document).ready(function () {
   })
   // Profile creation end <<<=================================================================
 
-
-
-
   
 
-
-
-  
-
-// populate profile page start ==================================================================>>>>
-
-
-
-
-
-// populate profile page end  <<<<==================================================================
+// change status
+$("#buttonEditStatus").on("click", function(){
+  var newSatus;
+  database.ref("users/" + firebase.auth().currentUser.uid).update({
+    status: newStatus
+  })
+})
 
 
 
-// gamer id card start ==================================================================>>>>
 
-// need to add onload="draw();" to body of page <---------------------!!!!!!
-function draw() {
-  // text
-  var par = document.getElementById('canvas').getContext('2d');
-  par.font = '30px serif';
-  par.fillText("Gamer ID Card", 8, 40);
-  // psn name
-  if (curUser.psnName !== undefined) {
-    par.fillText("psn: " + curUser.psnName, 220, 100);
-  } else {
-    par.fillText("psn: none", 220, 100);
-  }
-  // xbox name
-  if (curUser.xboxName !== undefined) {
-    par.fillText("xbox: " + curUser.xboxName, 220, 150);
-  } else {
-    par.fillText("xbox: none", 220, 150);
-  }
-  // steam name
-  if (curUser.steamName !== undefined) {
-    par.fillText("steam: " + curUser.steamName, 220, 200);
-  } else {
-    par.fillText("steam: none", 220, 200);
-  }
-
-  // avatar image
-  var ctx = canvas.getContext('2d');
-  ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
-}
 
 // gamer id card ends  <<<==================================================================
 
@@ -262,31 +219,56 @@ $("#signout-btn").click(function () {
 })
 
 function populatePage(){
-  
+  draw();
   firebase.auth().onAuthStateChanged( user => {
 
     firebase.database().ref('/users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
    
-      console.log(snapshot.val().firstname);
+      
 
        // // username
     $("#nameOfUser").html("<h1>" + snapshot.val().username + "</h1>");
+    // real name
+    if (snapshot.val().firstname !== undefined && snapshot.val().lastname !== undefined) {
+    $("#real-name").html("<h3>(" + snapshot.val().firstname + " " + snapshot.val().lastname + ")</h3>");
+    } else if (snapshot.val().firstname !== undefined && snapshot.val().lastname == undefined){
+      $("#real-name").html("<h3>(" + snapshot.val().firstname + ")</h3>");
+    }
     // // status
+    if(snapshot.val().status !== undefined){
     $("#status").html("<p>" + snapshot.val().status + "</p>");
+    } else {
+      $("#status").html("<p>Update your status here</p>");
+    }
     // // avatar
     $("#profileImage").html("<img src='" + snapshot.val().avatar + "' />");
     // // psn
-    $("#playStationUsername").html("<p>" + snapshot.val().psnName + "</p>");
+    $("#playStationUsername").html(snapshot.val().psnName);
     // // xbox
-    $("#xboxUsername").html("<p>" + snapshot.val().xboxName + "</p>");
+    $("#xboxUsername").html(snapshot.val().xboxName);
     // // steam
-    $("#steamUsername").html("<p>" + snapshot.val().steamName + "</p>");
+    $("#steamUsername").html(snapshot.val().steamName);
     // // game library
     var library = snapshot.val().gameLibrary
-    for(i=0; i<library.length; i++){
-      var newImage = $("<img src='" + library[i] + "' />");
-      $("#library").append(newImage);
-    }
+    // for(i=0; i<library.length; i++){
+    //   var newImage = $("<img src='" + library[i] + "' />");
+    //   $("#library").append(newImage);
+    // }
+
+    // contact stuff
+    if(snapshot.val().firstname !== undefined){
+    $("#firstName").html(snapshot.val().firstname);
+    } else {
+      $("#firstName").html("not listed"); 
+    }if(snapshot.val().lastname !== undefined){
+      $("#lastName").html(snapshot.val().lastname);
+      } else {
+        $("#lastName").html("not listed");
+      } 
+      
+    
+    
+    $("#emailOfUser").html(snapshot.val().email);
     });
    
    });
@@ -300,7 +282,67 @@ function populatePage(){
 }
 
 
+// gamer id card start ==================================================================>>>>
 
+// need to add onload="draw();" to body of page <---------------------!!!!!!
+function draw() {
+  var newImg;
+  firebase.auth().onAuthStateChanged( user => {
+
+    firebase.database().ref('/users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+   
+      newImg = $("<img src='" + snapshot.val().avatar + "' />");
+      newImg.attr("id", "image-source");
+      $("#image-share").html(newImg);
+      console.log(snapshot.val().avatar);
+      
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
+      // if(snapshot.val().avatar !== undefined){
+      // newImg = $("<img src='" + snapshot.val().avatar + "' />");
+      // console.log(snapshot.val().avatar);
+      // newImg.attr("id", "image-source");
+      // var ctx = canvas.getContext('2d');
+      // ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
+      // $("#image-share").html(newImg);
+      // } else {
+      //   newImg = $("<img src='assets/images/empty-photo.jpg' style='height: 150px; width: auto'/>");
+      //   newImg.attr("id", "image-source");
+      // $("#image-share").html(newImg);
+      // var ctx = canvas.getContext('2d');
+      // ctx.drawImage(document.getElementById('image-source'), 8, 60, 180, 180)
+      // }
+    });
+   
+   });
+  
+ 
+  // text
+  var par = document.getElementById('canvas').getContext('2d');
+  par.font = '30px serif';
+  par.fillText("Gamer ID Card", 8, 40);
+  // psn name
+  if (curUser.psnName !== undefined) {
+    par.fillText("psn: " + curUser.psnName, 220, 100);
+  } else {
+    par.fillText("psn: none", 220, 100);
+  }
+  // xbox name
+  if (curUser.xboxName !== undefined) {
+    par.fillText("xbox: " + curUser.xboxName, 220, 150);
+  } else {
+    par.fillText("xbox: none", 220, 150);
+  }
+  // steam name
+  if (curUser.steamName !== undefined) {
+    par.fillText("steam: " + curUser.steamName, 220, 200);
+  } else {
+    par.fillText("steam: none", 220, 200);
+  }
+
+  // avatar image
+ 
+}
 
 
 
