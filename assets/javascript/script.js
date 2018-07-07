@@ -266,7 +266,7 @@ $(document).ready(function () {
       var steamName = data.response.players[0].personaname;
       console.log(steamName)
       $("#steam-name").val(steamName);
-      curUser.avatar = data.response.players[0].avatarmedium;
+      curUser.avatar = data.response.players[0].avatarlarge;
      
       //  $("#image-share").html(image);
       var lastLogOff = data.response.players[0].lastlogoff;
