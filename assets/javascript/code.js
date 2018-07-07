@@ -200,6 +200,8 @@ function populatePage(){
     $("#real-name").html("<h3>(" + snapshot.val().firstname + " " + snapshot.val().lastName + ")</h3>");
     } else if (snapshot.val().firstname !== undefined && snapshot.val().lastName == null){
       $("#real-name").html("<h3>(" + snapshot.val().firstname + ")</h3>");
+    } else{
+      $("#real-name").html("");
     }
     // // status
     if(snapshot.val().status !== undefined){
@@ -228,8 +230,8 @@ function populatePage(){
     $("#firstName").html(snapshot.val().firstname);
     } else {
       $("#firstName").html("not listed"); 
-    }if(snapshot.val().lastname !== undefined){
-      $("#lastName").html(snapshot.val().lastname);
+    }if(snapshot.val().lastName !== undefined){
+      $("#lastName").html(snapshot.val().lastName);
       } else {
         $("#lastName").html("not listed");
       } 
