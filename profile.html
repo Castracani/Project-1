@@ -15,7 +15,7 @@
         <title>Gamer Tagged</title>
     </head>
 
-    <body>
+    <body onload="populatePage()">
         <main>
             <!-- NAVBAR -->
             <div class "container">
@@ -62,7 +62,9 @@
                                     <h2 class="header card-color" id="nameOfUser">John Smith</h2>
                                     <div class="card horizontal card-color-light">
                                         <div class="card-image" id="profileImage">
-                                            <img src="assets/images/profile picture Michael Scott.jpg">
+\                                            <img src="assets/images/profile picture Michael Scott.jpg">
+<a class="btn-floating btn-small waves-effect waves-light purple"id="buttonEditPicture"><i class="material-icons">create</i></a>
+
                                         </div>
                                         <div class="card-stacked">
                                             <div class="card-content">
@@ -74,6 +76,8 @@
                                                 <p>Last line: Lorem ipsum dolor sit amet. Lorem</p>
 
                                             </div>
+                                            <a class="btn-floating btn-small waves-effect waves-light purple"id="buttonEditStatus"><i class="material-icons">create</i></a>
+
                                             <div class="card-action">
                                                 <ul>
                                                     <li>
@@ -100,7 +104,10 @@
 
 
                                                 </ul>
+
                                             </div>
+                                            <a class="btn-floating btn-small waves-effect waves-light purple"id="buttonEditPicture"><i class="material-icons">create</i></a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +128,7 @@
                                             <a class="active" href="#test2">Gamer ID</a>
                                         </li>
                                         <li class="tab col s3">
-                                            <a href="#test3">Personal Information</a>
+                                            <a href="#test3">Contact</a>
                                         </li>
                                         <li class="tab col s3">
                                             <a href="#test4">Something else</a>
@@ -168,13 +175,13 @@
                                     <div class="col s12 m9 l11 push-l1">
                                         <div class="card deep-orange lighten-1">
                                             <div class="card-content white-text">
-                                                <span class="card-title">Personal Info</span>
+                                                <span class="card-title">Contact</span>
                                                 <p>Date joined:</p>
-                                                <p id="firstName">Full name:</p>
-                                                <p id="lastName">Full name:</p>
+                                                <p id="firstName">First name:</p>
+                                                <p id="lastName">last name:</p>
 
-                                                <p>Favorite game:</p>
-                                                <p>Email:</p>
+                                                <p id="myFavoriteGame">Favorite game:</p>
+                                                <p id="emailOfUser">Email:</p>
 
                                             </div>
                                             <div class="card-action">
@@ -206,7 +213,7 @@
             </div>
         </main>
         <div class="fixed-action-btn">
-            <a href="#" class="btn-floating red btn-large">
+            <a href="#" class="btn-floating floating-button-red btn-large">
                 <i class="large material-icons">add</i>
             </a>
             <ul>

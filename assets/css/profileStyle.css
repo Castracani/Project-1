@@ -34,6 +34,18 @@ body{
     vertical-align: middle;
 }
 
+#buttonEditPicture{
+position:relative;
+left:160px;
+bottom:30px;
+}
+
+#buttonEditStatus{
+  position:relative;
+  left:790px;
+  bottom:10px;
+}
+
 .firstParagraph{
 color:white;
 font-weight:bold;
