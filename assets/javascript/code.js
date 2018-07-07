@@ -29,6 +29,7 @@ var curUser = {
   steamLastOnline: "",
   gameLibrary: []
 }
+var counter = -1;
 
 
 
@@ -110,66 +111,24 @@ $(document).ready(function () {
     // add game to library
   
     $(document).on("click", ".add-game", function () {
+    counter++;
     event.preventDefault();
     var x = $(this).val(); //grabs value that will match location within array and assigns to a new variable
 
     var newGame = searchResults[x]; //grabs game title from searchResults array
+    localStorage.setItem("game-" + counter, newGame);
     newLibrary.push(newGame); //adds to libray variable
+    localStorage.setItem("gamesArr", JSON.stringify(newLibrary))
     console.log(newLibrary)
+    
 
   })
 
-  $(document).on("click", "#library-refresh", function(){
-    event.preventDefault();
-    var list = $("<ul>");
-    $("#library").append(list);
-    for(i=0; i<gameLibrary.length; i++){
-      
-      var listItem = $("<li>");
-      listItem.text(gameLibrary[i]);
-      $("#library").append(listItem);
-    }
-  })
+  
 
 
   // giantbomb API end <<<=================================================================
 
-
-
-
-  // Profile creation start ============================================================>>>
-
-
-  $(document).on("click", "#profile-submit", function () {
-    event.preventDefault();
-    curUser.firstName = $("#firstname").val();
-    curUser.lastName = $("#lastname").val();
-    curUser.username = $("#username").val();
-    curUser.email = $("#email").val();
-    curUser.steamName = $("#steam-name").val();
-    curUser.psnName = $("#psn-name").val();
-    curUser.xboxName = $("#gamer-tag").val();
-    curUser.nintendoId = $("#nintendo-id").val();
-    curUser.aboutMe = $("#about-input").val();
-
-    // set local storage
-
-
-    // store data into firebase  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    database.ref("users/" + firebase.auth().currentUser.uid).update({
-      
-        username: curUser.username,
-        firstname: curUser.firstName,
-        lastName: curUser.lastName,
-        email: curUser.email,
-        steamName: curUser.steamName,
-        psnName: curUser.psnName,
-        xboxName: curUser.xboxName,
-      
-
-    })
-  })
-  // Profile creation end <<<=================================================================
 
   
 
@@ -220,6 +179,14 @@ $("#signout-btn").click(function () {
 
 function populatePage(){
   draw();
+  // game library
+  var retrievedData = localStorage.getItem("gamesArr");
+  var gamesLibrary = JSON.parse(retrievedData);
+  for(i=0; i<gamesLibrary.length; i++){
+    var newImage = $("<img src='" + gamesLibrary[i] + "' height='200px';width=auto/>")
+    $("#library").append(newImage);
+
+  }
   firebase.auth().onAuthStateChanged( user => {
 
     firebase.database().ref('/users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
@@ -249,11 +216,8 @@ function populatePage(){
     // // steam
     $("#steamUsername").html(snapshot.val().steamName);
     // // game library
-    var library = snapshot.val().gameLibrary
-    // for(i=0; i<library.length; i++){
-    //   var newImage = $("<img src='" + library[i] + "' />");
-    //   $("#library").append(newImage);
-    // }
+    
+ 
 
     // contact stuff
     if(snapshot.val().firstname !== undefined){
