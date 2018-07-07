@@ -196,7 +196,11 @@ function populatePage(){
       
 
        // // username
+       if(snapshot.val().username !== undefined){
     $("#nameOfUser").html("<h1>" + snapshot.val().username + "</h1>");
+       } else {
+        $("#nameOfUser").html("<h1>John Smith</h1>");
+       }
     // real name
     if (snapshot.val().firstname !== undefined && snapshot.val().lastname !== undefined) {
     $("#real-name").html("<h3>(" + snapshot.val().firstname + " " + snapshot.val().lastname + ")</h3>");
